@@ -1,0 +1,128 @@
+<form method="post" action="{:url('manydel')}">
+<div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+                        <div class="panel-heading ">专辑列表
+                           <span> <button style="background-color: #3498DB;width:60px;height:30px;line-height: 30px;">全选</button></span>
+          <span> <button style="background-color: #3498DB;width:60px;height:30px;line-height: 30px;">反选</button></span>
+            <button class="btn btn-sm btn-primary pull-right">
+            批量删除
+            <!-- <i class="icon-reply icon-only"></i> -->
+        </button>
+        <span class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = '{:url('add')}'">
+            添加
+            <!-- <i class="icon-reply icon-only">s</i> -->
+        </span>             
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <table id="simple-table" class="table  table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="center">
+                               
+                                </th>
+                                <th class="detail-col">序号</th>
+                                <th>专辑名称</th>
+                                <th>所属类型</th>
+                                <th>封面</th>
+                                <th>唱片公司</th>
+                                
+                                <th>
+                                    <!-- <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i> -->
+                                    歌手
+                                </th>
+                                <th class="hidden-480">点击数</th>
+                                <th>推荐</th>
+                                <th>添加时间</th>
+                                <th>管理员操作</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                         {notempty name="info"}   
+                            {volist name="info" id="vo"}
+                            <tr>
+                                <td class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" name="id[]" value="{$vo.id}"class="ace" />
+                                        <span class="lbl"></span>
+                                    </label>
+                                </td>
+                                <td>{$vo.id}</td>
+                                <td><a href="#">{$vo.aname}</a></td>
+                                <td>{$vo.name}</td>
+                                <td style="width:70px;"> <img src="{$vo.pic}" style="width:45px;height:45px; border-radius: 50%;"></td>
+                                <td style="width:200px;">{$vo.company}</td>
+                              
+                                <td>{$vo.sname}</td>
+                                <td style="width:55px;">{$vo.dianji}</td>
+                                <td style="width:55px;">{eq name="vo['top']" value="1"}是{else/}否{/eq}</td>
+
+                                <td  style="width:65px;"class="hidden-480">
+                                    <span class="label label-sm label-warning">{$vo['create_time']||beforeTime}</span>
+
+                                </td>
+                                
+                                <td>
+                                    <!-- {//neq name="vo['id']" value="1"} -->
+                                    <div class="hidden-sm hidden-xs btn-group">
+                                
+                                        <a href="{:url('add',array('id'=>$vo['id']))}">
+                                           <span class="btn btn-xs btn-info">
+                                                <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                            </span>
+                                        </a>
+                                        <a href="{:url('manydel',array('id'=>$vo['id']))}">
+                                           <span class="btn btn-xs btn-danger">
+                                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                            </span>
+                                        </a>
+                                       
+                                   
+                                
+                                    
+                                    </div>
+                                    <!-- {///neq} -->
+                                </td>
+                                
+                            </tr>
+                            {/volist} 
+                     {else/}
+                        <td colspan="10" class="text-center">暂时还没有内容! </td>
+                        {/notempty}   
+                        </tbody>
+
+                    </table>
+                   
+                </div><!-- /.span -->
+            </div><!-- /.row -->
+             {$page}
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+
+</form>
+<script type="text/javascript">
+  var oBtn = document.getElementsByTagName('button');
+  var oInput = document.getElementsByTagName('input');
+  oBtn[1].onclick = function () {
+    for (var i=0; i<oInput.length; i++) {
+      oInput[i].checked = true;
+    }
+    return false;
+  }
+ 
+  oBtn[2].onclick = function () {
+    for (var i=0; i<oInput.length; i++) {
+      if (oInput[i].checked == true) {
+        oInput[i].checked = false;
+      } else {
+        oInput[i].checked = true;
+      }
+      
+    }
+    return false;
+  }
+</script>

@@ -1,0 +1,163 @@
+ <div class="col-sm-6 pull-right">
+        <button class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = 'index'">
+            返回列表
+            <i class="icon-reply icon-only"></i>
+        </button>
+    </div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">{:input('id')?'编辑':'新增'}歌曲</div>
+ 	<div class="panel-body">
+        <form class="form-horizontal" enctype="multipart/form-data" action="{:input('id')?'edit':'Upload'}" name="songs"  method="post">	
+       		<div class="form-group">	
+				<label class=" col-sm-2 control-label">歌曲名称</label>
+				<div class="col-sm-3">
+					<input  type="text"  name="name" id="name" value="{$data.name|default=''}" class="form-control">	
+					<input  type="hidden" name="id" id="" class="form-control" value="{$data.id|default=''}" > 				
+				</div>
+				<span class="help-block">此项不能为空</span>
+			</div>	
+
+			<div class="form-group">	
+				<label class="col-sm-2 control-label">封面地址</label>
+				<div class="col-sm-4 mr-xs upimg-inner" style="position:relative;">	
+			
+					<input type="url"  name="pic" >			
+					<div class="upload-progr">
+						<div class="up-progress"><div class="upload-bar"></div></div>
+					</div>
+				</div>
+					
+	
+</div>
+			
+			<div class="form-group">	
+				<label class="col-sm-2 control-label">上传音乐</label>
+				<div class="col-sm-4 mr-xs upimg-inner" style="position:relative;">	
+			
+					<input type="file" c name="music" value="">			
+					<div class="upload-progr">
+						<div class="up-progress"><div class="upload-bar"></div></div>
+					</div>
+				</div>
+					
+	
+
+				
+			</div>	
+			<div style="margin-left: 95px;" class="form-group">   
+                        <label class="col-sm-1 control-label">所属曲风</label>
+                        <div class="form-group">
+                            <div class="col-sm-9">
+                                {:select($selectCate,input('pid'),'name="qid" id="qid" class="col-xs-10 col-sm-5"')}
+                            </div>
+                        </div> 
+                    </div>		
+
+
+    		<div class="form-group">	
+    			<label class="col-sm-2 control-label">所属艺术家</label>
+    			<div class="col-sm-2">				
+    				
+    				<select name="sid"  id ="sid" class="form-control set-name" size="5">
+    				<option    value="{$data.sid|default='0'}">{$data.sname|default='请选择类别'}</option>
+    			{volist name="singer" id="vo"}
+    				<option value="{$vo.sid}" >{$vo.sname}</option>
+
+    			{/volist}
+    				</select>
+
+    			</div>	
+    		    	<label class="col-sm-2 control-label">专辑类型</label>
+    			<div class="col-sm-2">
+    				
+    				<select name="zid"  id ="zid" class="form-control set-name" size="5">
+    				<option    value="{$data.zid|default='0'}">{$data.aname|default='请选择类别'}</option>
+    			{volist name="type" id="vo"}
+    				<option value="{$vo.zid}" >{$vo.name}</option>
+
+    			{/volist}
+    				</select>
+    			</div>
+
+    			<label class="col-sm-1 control-label">所属标签</label>	
+    			<div class="col-sm-2">
+					<select name="bid"  id ="bid" class="form-control set-name" size="5">
+    				<option    value="{$data.bid|default='0'}">{$data.bname|default='请选择类别'}</option>
+    			{volist name="bq" id="bqvo"}
+    				<option value="{$bqvo.bid}" >{$bqvo.name}</option>
+
+    			{/volist}
+    				</select>
+                 
+                    	
+				</div>							    		
+    		</div>
+
+			<div class="form-group">	
+				<label class="col-sm-2 control-label ">所需金币</label>
+    			<div class="col-sm-1">
+    				<input type="number" class="form-control"  value="{$data.ispay|default=''}" name="ispay">    				
+    			</div>				
+
+				<label class="col-sm-2 control-label">推荐位</label>
+		        <div class="col-sm-6">
+					<input type="checkbox" name="top"   {if condition="$data['top'] eq '1'"}
+checked="checked"
+{/if}    value=1 >
+	            </div>				                   		            	
+
+			</div>  
+
+				
+			<div class="form-group">	
+				<label class=" col-sm-2 control-label">歌词</label>
+			<textarea name="m_text" id="" cols="30" rows="10" style="height:200px;width:700px;margin:10px;">{$data.m_text|default=''}</textarea>
+		        
+		    </div>
+
+
+
+			</div>
+			
+    	  
+    		<div class="form-group">
+
+            	<div class="col-sm-4 col-sm-offset-2">
+                	<button class="btn btn-primary ajax-post" id="baocun" type="submit">保存</button>
+                	<span style="color:red;" id= 'aaa'></span>
+            	</div>
+        	</div>
+        </form>
+	</div>
+</div>
+<script src="/static/jquery-1.11.3.js"></script>
+
+<script type="text/javascript">
+$('#baocun').click(function() {
+   
+
+    if (!$('#name').val()) {
+        $('#aaa').html('请输入音乐名');
+        return false;
+    }
+     if (!$('#sid').val()) {
+        $('#aaa').html('请选择歌手');
+        return false;
+    }
+   if (!$('#zid').val()) {
+        $('#aaa').html('请填写专辑');
+        return false;
+    }
+
+
+	if (!$('#bid').val()) {
+	        $('#aaa').html('请填写标签');
+	        return false;
+	    }
+
+})
+</script>
+
+
+

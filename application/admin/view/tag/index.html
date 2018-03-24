@@ -1,0 +1,131 @@
+<form method="post" action="{:url('del')}">
+<div class="row">
+    <div class="col-lg-12">
+    	<div class="panel panel-default">
+          <div class="panel-heading ">标签列表 
+          <span> <button style="background-color: #3498DB;width:60px;height:30px;line-height: 30px;">全选</button></span>
+          <span> <button style="background-color: #3498DB;width:60px;height:30px;line-height: 30px;">反选</button></span>
+                  <button class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = 'manydel'">
+            批量删除
+            <i class="icon-reply icon-only"></i>
+        </button>
+    <!--     <a class="btn btn-sm btn-primary pull-right">
+        添加
+        <i class="icon-reply icon-only"></i>
+    </a> -->
+      </div>
+    		<div class="table-responsive">
+        		<table class="table table-striped table-bordered table-hover">  
+                  
+            		<thead>
+                		<tr>
+                			<th style="width: 5%" class="check-all">
+                          		
+                      </th> 
+                    <th>ID</th>
+            				<th style="width:200px;">标签名称</th>
+            				
+                         	<th>添加时间</th>
+                         	<th class="text-center">操作</th>
+                    	</tr>
+                	</thead>
+                    <tbody>
+                     {notempty name="info"}
+              {volist name="info" id="data" }  
+                      	<tr>
+                        	<td>
+                          		<div class="checkbox c-checkbox">
+                             		<label>
+                                <div >
+                                	<input type="checkbox" class="ids"  value="{$data.bid}" name="bid[]"></div>
+                                	<!-- <span class="fa fa-check"></span> -->
+                             		</label>
+                          		</div>
+                       		</td>				
+        					<td>{$data.bid}</td>
+        					<td class='m-name'>{$data.name}     </td>
+        					
+                  <td class="hidden-480">
+                                    <span class="label label-sm label-warning">{:date('Y-m-d H:i:s',$data['create_time'])}</span>
+
+                                </td>
+                    		<td class="text-center">
+	                         
+	                            <a class="btn btn-labeled btn-sm btn-danger btn-del" href="{:url('del',array('bid'=>$data['bid']))}"><em class="fa fa-times"></em></a>
+                         	</td>
+                      	</tr>
+                      	{/volist}
+        			   {else/}
+                <td colspan="10" class="text-center">暂时还没有内容! </td>
+                {/notempty}
+                    </tbody>
+                </table>
+    		</div>
+    		<!-- 结束 表格 -->
+{$page}    		
+    	</div>
+	</div>
+</div>
+</form>
+
+<div class="panel panel-default" >
+  <div class="panel-heading">新增标签</div>
+  <div class="panel-body">
+      <form class="form-horizontal" enctype="multipart/form-data" action="{:url('addtype')}" name="songs"  method="post">                            
+ 
+           <div class="form-group">  
+          <label class="col-sm-2 control-label">标签名称</label>
+          <div class="col-sm-2">
+                      
+            <input  type="text" name="name" id="zname" class="form-control" value="" >          
+          </div>
+          <p class="help-block">此项不能为空</p>
+          </div>
+                            
+     
+                        
+        <div class="form-group">    
+              <div class="col-sm-4 col-sm-offset-2">
+                  <button class="btn btn-primary ajax-post" target-form="form-horizontal" id="baocun" type="submit">保存</button>
+                   <span id="aaa" style="color:red;" ></span>
+              </div>
+          </div>
+        </form>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var oBtn = document.getElementsByTagName('button');
+  var oInput = document.getElementsByTagName('input');
+  // 全选
+  oBtn[1].onclick = function () {
+    for (var i=0; i<oInput.length; i++) {
+      oInput[i].checked = true;
+    }
+    return false;
+  }
+ // 反选
+  oBtn[2].onclick = function () {
+    for (var i=0; i<oInput.length; i++) {
+      if (oInput[i].checked == true) {
+        oInput[i].checked = false;
+      } else {
+        oInput[i].checked = true;
+      }
+      
+    }
+    return false;
+  }
+
+
+</script>
+<script src="/static/jquery-1.11.3.js"></script>
+<script type="text/javascript">
+// 判断是否输入信息
+$('#baocun').click(function() {
+    if (!$('#zname').val()) {
+        $('#aaa').html('请输入添加的标签');
+        return false;
+    }
+})
+</script>

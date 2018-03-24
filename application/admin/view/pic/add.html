@@ -1,0 +1,47 @@
+ <div class="col-sm-6 pull-right">
+        <button class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = 'index'">
+            返回列表
+            <i class="icon-reply icon-only"></i>
+        </button>
+    </div>
+<div class="panel panel-default">
+<div class="panel-heading">新增图片</div>
+</div>
+<script src="/admin/js/jquery.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/admin/js/diyUpload/css/webuploader.css">
+<link rel="stylesheet" type="text/css" href="/admin/js/diyUpload/css/diyUpload.css">
+<script type="text/javascript" src="/admin/js/diyUpload/js/webuploader.html5only.min.js"></script>
+<script type="text/javascript" src="/admin/js/diyUpload/js/diyUpload.js"></script>
+
+<style>
+
+#box{ margin:50px auto; width:540px; min-height:400px; background:#FF9}
+
+</style>
+<body>
+<div id="box">
+	<div id="test" ></div>
+</div>
+
+
+</body>
+<script type="text/javascript">
+
+/*
+* 服务器地址,成功返回,失败返回参数格式依照jquery.ajax习惯;
+* 其他参数同WebUploader
+*/
+
+$('#test').diyUpload({
+	// url:'fileupload.php',
+	url:'uplode',
+	success:function( data ) {
+		console.info( data );
+	},
+	error:function( err ) {
+		console.info( err );	
+	}
+});
+
+</script>

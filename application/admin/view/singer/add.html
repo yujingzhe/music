@@ -1,0 +1,86 @@
+ <div class="col-sm-6 pull-right">
+        <button class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = 'index'">
+            返回列表
+            <i class="icon-reply icon-only"></i>
+        </button>
+    </div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">{:input('sid')?'编辑':'新增'}艺术家</div>
+ 	<div class="panel-body">
+    	<form class="form-horizontal" enctype="multipart/form-data" action="{:input('sid')?'xiugai':'tianjia'}" name="songs"  method="post">																	
+    		<div class="form-group">	
+    			<label class="col-sm-2 control-label">艺术家名称</label>
+    			<div class="col-sm-3">
+                    <input  type="text" name="sname" id="sname" class="form-control" value="{$data.sname|default=''}" >                
+    				<input  type="hidden" name="sid" class="form-control" value="{$data.sid|default=''}" >   				
+    			</div>
+    			<span class="help-inline">此项不能为空</span>
+    	    </div>		
+    
+    	       <div class="form-group">        
+                <label class="col-sm-2 control-label">所属类型</label>
+                <div class="col-sm-2">
+                    
+                    <select name="class"  id ="zid" class="form-control set-name">
+                    <option    value="{$data.class|default='0'}">{$data.name|default='其他'}</option>
+                {volist name="type" id="vo"}
+                    <option value="{$vo.sid}" >{$vo.name}</option>
+
+                {/volist}
+                    </select>
+                </div>  
+                </div>
+    	
+	
+    
+			<div class="form-group">	
+				<label class="col-sm-2 control-label">封面地址</label>
+				<input type="url" class="form-control" style="width:400px;" name="spic" id="cover"  value="{$data.spic|default=""}">			
+					
+				
+			</div>	
+    	
+		
+					
+	
+    	 <div class="form-group">    
+                <label class="col-sm-2 control-label" >推荐位</label>
+                <div class="col-sm-3">  
+              <input type="checkbox"   {if condition="$data['top'] eq '1'"}
+checked="checked"
+{/if}   value='1'name = "top"><span class="fa fa-check">为推荐</span></div>                            
+            </div>  
+    		
+    		<div class="form-group">	
+    			<label class="col-sm-2 control-label">简介</label>
+				<div class="col-sm-7">
+					<textarea  name="jianjie" class="form-control">{$data.jianjie|default=''}</textarea>
+				
+				</div>
+    	    </div>				 
+									
+    		<div class="form-group">
+    			
+            	<div class="col-sm-4 col-sm-offset-2">
+                	
+                	<button class="btn btn-primary ajax-post" target-form="form-horizontal" id="baocun" type="submit">保存</button>
+                     <span style="color:red;" id= 'aaa'></span>
+            	</div>
+        	</div>
+        </form>
+	</div>
+</div>													
+ <script src="/static/jquery-1.11.3.js"></script>
+<script>
+$('#baocun').click(function() {
+    if (!$('#sname').val()) {
+        $('#aaa').html('请输入歌手名');
+        return false;
+    }    
+
+})
+</script>
+
+
+
