@@ -54,11 +54,12 @@ class PicController extends CommonController
 		return $this->fetch();
 	}
 
-	public function uplode()
-	{
-		$a = input();
-		return $a;
-		// var_dump($a);
-	}
+/**
+ * 多图上传
+ * @return [type] [description]
+ */
+	public function upload()
+	{   
+    } 
 
 }

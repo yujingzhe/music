@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ee99a9a9f2893e18012a0189ab1483f",
+    "content-hash": "456f57946531a1f92cf99045ca2f0d0f",
     "packages": [
         {
             "name": "phpmailer/phpmailer",
@@ -163,6 +163,42 @@
             "time": "2017-12-31T16:37:49+00:00"
         },
         {
+            "name": "topthink/think-helper",
+            "version": "v1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/top-think/think-helper.git",
+                "reference": "0c99dc625b0d2d4124e1b6ca15a3ad6f0125963f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/top-think/think-helper/0c99dc625b0d2d4124e1b6ca15a3ad6f0125963f.zip",
+                "reference": "0c99dc625b0d2d4124e1b6ca15a3ad6f0125963f",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "think\\helper\\": "src"
+                },
+                "files": [
+                    "src/helper.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "yunwuxin",
+                    "email": "448901948@qq.com"
+                }
+            ],
+            "description": "The ThinkPHP5 Helper Package",
+            "time": "2017-04-05T07:15:37+00:00"
+        },
+        {
             "name": "topthink/think-installer",
             "version": "v1.0.12",
             "source": {
@@ -202,6 +238,40 @@
                 }
             ],
             "time": "2017-05-27T06:58:09+00:00"
+        },
+        {
+            "name": "zoujingli/ip2region",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zoujingli/ip2region.git",
+                "reference": "5d981fbf3b574bad7fe9652e7aecba0920f54325"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/zoujingli/ip2region/5d981fbf3b574bad7fe9652e7aecba0920f54325.zip",
+                "reference": "5d981fbf3b574bad7fe9652e7aecba0920f54325",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "Ip2Region.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache 2.0"
+            ],
+            "description": "Ip2Region",
+            "homepage": "https://github.com/zoujingli/Ip2Region",
+            "keywords": [
+                "Ip2Region"
+            ],
+            "time": "2017-11-09T03:36:17+00:00"
         }
     ],
     "packages-dev": [],

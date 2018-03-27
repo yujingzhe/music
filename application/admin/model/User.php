@@ -23,8 +23,8 @@ class User extends \think\Model
 			  ->where('bx_user.delete_time','null')
 			  ->field('bx_user.*,bx_userinfo.grade,bx_userinfo.name,bx_userinfo.address,bx_userinfo.qq,bx_userinfo.gq,bx_userinfo.tel')
 			  ->join('bx_userinfo','bx_userinfo.uid = bx_user.id','left')
-			  // ->select();
-			  ->paginate(6);
+			  ->select();
+			  // ->paginate(6);
 		return $info;
 	}
 

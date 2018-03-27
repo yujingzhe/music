@@ -3,6 +3,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
+        <div id="ss"></div>
             <div class="panel-heading ">歌曲列表
                            <span> <button style="background-color: #3498DB;width:60px;height:30px;line-height: 30px;">全选</button></span>
           <span> <button style="background-color: #3498DB;width:60px;height:30px;line-height: 30px;">反选</button></span> 
@@ -16,7 +17,7 @@
         </span>
 
    
-      <span  class="pull-right" style="margin-right: 10px;"> <input type="text" name="info" id="hh" placeholder="搜索框" >    <span  onclick="sousuo();">哈哈</span>        
+      <span  class="pull-right" style="margin-right: 10px;"> <input type="text" name="info" id="hh" placeholder="搜索框" >  <span  onclick="sousuo();" class = "btn btn-labeled btn-sm btn-danger btn-del" style="background-color: blue;"><em class = 'fa fa-search'  ></em></span>        
   </span>   
 
 
@@ -136,7 +137,8 @@ function sousuo()
          url:'search',
         data:{"info":a.val()},
     success:function(info){
-        OK;
+        // console.log(info);
+        $('#ss').html(info);
     }
     });
 }

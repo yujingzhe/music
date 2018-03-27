@@ -162,6 +162,44 @@
         "description": "captcha package for thinkphp5"
     },
     {
+        "name": "topthink/think-helper",
+        "version": "v1.0.6",
+        "version_normalized": "1.0.6.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/top-think/think-helper.git",
+            "reference": "0c99dc625b0d2d4124e1b6ca15a3ad6f0125963f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://files.phpcomposer.com/files/top-think/think-helper/0c99dc625b0d2d4124e1b6ca15a3ad6f0125963f.zip",
+            "reference": "0c99dc625b0d2d4124e1b6ca15a3ad6f0125963f",
+            "shasum": ""
+        },
+        "time": "2017-04-05T07:15:37+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "think\\helper\\": "src"
+            },
+            "files": [
+                "src/helper.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "yunwuxin",
+                "email": "448901948@qq.com"
+            }
+        ],
+        "description": "The ThinkPHP5 Helper Package"
+    },
+    {
         "name": "topthink/think-installer",
         "version": "v1.0.12",
         "version_normalized": "1.0.12.0",
@@ -202,6 +240,42 @@
                 "name": "yunwuxin",
                 "email": "448901948@qq.com"
             }
+        ]
+    },
+    {
+        "name": "zoujingli/ip2region",
+        "version": "v1.0.2",
+        "version_normalized": "1.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/zoujingli/ip2region.git",
+            "reference": "5d981fbf3b574bad7fe9652e7aecba0920f54325"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://files.phpcomposer.com/files/zoujingli/ip2region/5d981fbf3b574bad7fe9652e7aecba0920f54325.zip",
+            "reference": "5d981fbf3b574bad7fe9652e7aecba0920f54325",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "time": "2017-11-09T03:36:17+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "Ip2Region.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache 2.0"
+        ],
+        "description": "Ip2Region",
+        "homepage": "https://github.com/zoujingli/Ip2Region",
+        "keywords": [
+            "Ip2Region"
         ]
     }
 ]

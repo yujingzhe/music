@@ -284,11 +284,14 @@ class MusicController extends CommonController
    */
   public function search()
   {
-    // $_POST['data'] = empty($_POST['data'])?'':$_POST['data'];
-    
-    $data = input();
-    return $data;
-    // $this->assign('data',$data);
-    // return $this->fetch();
+
+    $info = input()['info'];
+    $list = model('music')->sousuo($info);
+    $page = $list->render();
+
+    $this->assign('list', $list);
+    $this->assign('info', $info);
+    $this->assign('page', $page);
+    return $this->fetch();
   }
 }

@@ -154,6 +154,23 @@ class Mv extends \think\Model
         return $info;
     }
 
-    
+    /**
+     * / 查询数据集
+     * @return [type] [description]
+     */
+    public function sousuo($info)
+    {
+        $mv = Db::table('bx_mv')
+                ->field('bx_mv.*')
+                ->where('bx_mv.delete_time',null)
+                ->where('bx_mv.check',1)
+                ->where('bx_mv.m_name','like','%'.$info.'%')
+                ->view('bx_singer','sname','bx_mv.sid = bx_singer.sid ')
+                ->view('bx_mvtype','mv_name','bx_mv.cate = bx_mvtype.id')
+               // ->view('bx_cate','c_name','bx_music.qid = bx_cate.c_id')
+               // ->select();
+               ->paginate(10);
+        return $mv;
+    }
 
 }

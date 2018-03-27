@@ -1,8 +1,8 @@
 <?php
 namespace application\admin\controller;
-
+use think\Request;
 use think\Loader;
-
+use Ip2Region\Ip2Region;
 class AdminController extends CommonController {
 
     public function index() {
@@ -33,7 +33,18 @@ class AdminController extends CommonController {
             }
         }
 
+        // ip信息
+        $ip2region = new Ip2Region();
+        foreach ($lists as $key => $value) {
+
+            $ip = long2Ip($value['lastloginip']);
+            $dizhi[$key] = $ip2region->btreeSearch($ip);
+            // var_dump($dizhi);
+            $lists[$key]['address'] = $dizhi[$key]['region'];
+        }       
+// var_dump($lists[0]);
         $this->assign('lists', $lists);
+        // $this->assign('dizhi', $dizhi);
         return $this->fetch();
     }
 

@@ -254,15 +254,32 @@ class MvController extends CommonController
     $res = model('mv')->zhiding($id);
     // var_dump($res);die;
      if ($res) {
-            echo "<script>alert('置顶成功')</script>"; 
+            echo "<script>alert('操作成功')</script>"; 
            echo "<script>window.location.href='index';</script>";
            exit();
            
         } else {
          
-            echo "<script>alert('置顶失败')</script>"; 
+            echo "<script>alert('操作失败')</script>"; 
             echo "<script>window.history.go(-1)</script>";
             exit();
         }
+  }
+
+    /**
+   * 搜索
+   */
+  public function search()
+  {
+
+    $info = input()['info'];
+    // return $info;
+    $list = model('mv')->sousuo($info);
+    $page = $list->render();
+// return $list;
+    $this->assign('list', $list);
+    $this->assign('info', $info);
+    $this->assign('page', $page);
+    return $this->fetch();
   }
 }

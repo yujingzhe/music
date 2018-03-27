@@ -46,7 +46,7 @@ class Music extends \think\Model
                ->where('bx_music.delete_time',null)
                ->where('bx_music.check',1)         
                ->order('id desc')
-               ->limit(6)
+               ->limit(7)
                ->select();
         return $music;
     }
@@ -170,6 +170,23 @@ class Music extends \think\Model
         return $info;
     }
 
-    
+    /**
+     * / 搜索数据集
+     * @return [type] [description]
+     */
+    public function sousuo($info)
+    {
+        $music = Db::table('bx_music')
+               ->field('bx_music.id, bx_music.name,bx_music.like, bx_music.ispay,bx_music.good, bx_music.down, bx_music.hit, bx_music.top, bx_music.update_time, bx_music.music_url')
+               ->where('bx_music.delete_time',null)
+               ->where('bx_music.check',1)
+               ->where('bx_music.name','like','%'.$info.'%')
+               ->view('bx_singer','sname','bx_music.sid = bx_singer.sid ')
+               ->view('bx_album','aname','bx_music.zid = bx_album.id')
+               ->view('bx_cate','c_name','bx_music.qid = bx_cate.c_id')
+               // ->select();
+               ->paginate(10);
+        return $music;
+    }
 
 }

@@ -481,60 +481,6 @@
 }(jQuery, window, document));
 
 /**=========================================================
- * Module: tooltips.js
- * 初始化 Bootstrap 工具提示与自动布局
- =========================================================*/
-
-(function($, window, document){
-
-  $(function(){
-
-    $('[data-toggle="tooltip"]').tooltip({
-    	
-      container: 'body',
-      placement: function (context, source) {
-                    //return (predictTooltipTop(source) < 0) ?  "bottom": "top";
-                    var pos = "top";
-                    if(predictTooltipTop(source) < 0)
-                      pos = "bottom";
-                    if(predictTooltipLeft(source) < 0)
-                      pos = "right";
-                    return pos;
-                }
-    });
-
-  });
-
-  // Predicts tooltip top position 
-  // based on the trigger element
-  function predictTooltipTop(el) {
-    var top = el.offsetTop;
-    var height = 40; // asumes ~40px tooltip height
-
-    while(el.offsetParent) {
-      el = el.offsetParent;
-      top += el.offsetTop;
-    }
-    return (top - height) - (window.pageYOffset);
-  }
-
-  // Predicts tooltip top position 
-  // based on the trigger element
-  function predictTooltipLeft(el) {
-    var left = el.offsetLeft;
-    var width = el.offsetWidth;
-
-    while(el.offsetParent) {
-      el = el.offsetParent;
-      left += el.offsetLeft;
-    }
-    return (left - width) - (window.pageXOffset);
-  }
-
-}(jQuery, window, document));
-
-
-/**=========================================================
  * Module: user-block-status.js
  * 用于下拉栏的变化
  * 用户状态

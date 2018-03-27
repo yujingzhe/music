@@ -1,3 +1,4 @@
+<!-- <script type="text/javascript" src="http://ip.chinaz.com/getip.aspx"></script> -->
 <div class="page-content">
     <div class="col-sm-6 pull-right">
         <span class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = 'info'">
@@ -39,7 +40,8 @@
                         </thead>
 
                         <tbody>
-                            {volist name="lists" id="vo"}
+                            {volist name="lists" id="vo"  key="k" }
+                       
                             <tr>
                                 <td class="center">
                                     <label class="pos-rel">
@@ -50,7 +52,13 @@
                                 <td>{$vo.id}</td>
                                 <td><a href="#">{$vo.username}</a></td>
                                 <td>{eq name="vo['id']" value="1"}超级管理员{else/}{$vo.groups}{/eq}</td>
-                                <td class="hidden-480">{:long2ip($vo.lastloginip)}</td>
+
+                                 
+                                <td class="hidden-480">{:long2ip($vo.lastloginip)} --- {$vo['address']} </td>
+                                
+
+
+                                
                                 <td>{:date('Y-m-d H:i:s',$vo['lastlogintime'])}</td>
 
                                 <td class="hidden-480">
@@ -102,7 +110,7 @@
                                 </td>
                                 
                             </tr>
-                            {/volist}    
+                            {/volist}  
                         </tbody>
                     </table>
                    
@@ -114,5 +122,16 @@
     </div><!-- /.row -->
 </div><!-- /.page-content -->
 
+
+    <script src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
+    <script type="text/javascript">
+    //format参数设置返回格式 js/json
+    //ip 要查询IP 可选
+    //反回格式如下：
+    //var remote_ip_info = {"ret":1,"start":"117.89.35.0","end":"117.89.35.255","country":"\u4e2d\u56fd","province":"\u6c5f\u82cf","city":"\u5357\u4eac","district":"\u767d\u4e0b","isp":"\u7535\u4fe1","type":"","desc":""};
+    // console.log(remote_ip_info["country"]+','+remote_ip_info["province"]+"省"+','+remote_ip_info["city"]+"市")
+    console.log(remote_ip_info)
+    //中国,江苏省,南京市
+    </script>
 
 

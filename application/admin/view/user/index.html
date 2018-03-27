@@ -23,21 +23,21 @@
                                             		</div>
                       </th> -->
          				<!-- <th style="width:5px;">UID</th> -->
-         				<th style="width:20px;">ID</th>
-         				<th style="width:50px;">头像</th>
+         				<th style="width:10px;">ID</th>
+         				<th style="width:45px;">头像</th>
         				<th style="width:90px;">昵称</th>
         				<th style="width:70px;">名字</th>
         				<th style="width:50px;">积分</th>
 						
-						<th style="width:100px;">QQ</th>
+						<th style="width:80px;">QQ</th>
 						<th style="width:100px;">电话</th>
 						
 				
-        				<th style="width:170px;">邮箱</th>
-        				<th style="width:100px;">最后登录时间</th>
-        				<th style="width:150px;">最后登录IP</th>
+        				<th style="width:140px;">邮箱</th>
+        				<th style="width:200px;">最后登录</th>
+        				<!-- <th style="width:150px;">最后登录IP</th> -->
         				<th style="width:300px;">个签</th>
-        			<th style="width:100px;">操作</th>
+        			<th style="width:90px;">操作</th>
                       </tr>
                     </thead>
                     <tbody role="alert" aria-live="polite" aria-relevant="all">
@@ -65,8 +65,9 @@
 							
 
 							<td>{$vo['email']} </td>
-        					<td><span>{$vo.logintime|time_format}</span></td>
-        					<td><span>{:long2ip($vo['regip'])}</span></td>
+        					<td><span>{$vo.logintime|time_format}</br>
+                            {$vo['region']}
+                  </span></td>
         					<td>{$vo.gq}</td>
 							<th> 
 

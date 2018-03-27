@@ -1,6 +1,7 @@
 <?php
 namespace application\admin\controller;
 use think\Loader;
+use Ip2Region\Ip2Region;
 class UserController extends CommonController 
 {
 	/**
@@ -10,10 +11,23 @@ class UserController extends CommonController
 	public function index()
 	{	
         $info = model('User')->chaxun();
-        $this->assign('info', $info);
-        $page = $info->render();
-       // dump($info);die;
-        $this->assign('page', $page); 
+     
+        // $page = $info->render();
+       
+        $ip2region = new Ip2Region();
+        foreach ($info as $key => $value) {
+
+	        $ip = long2Ip($value['loginip']);
+
+	        $dizhi[$key] = $ip2region->btreeSearch($ip);
+	      
+	        $info[$key]['region'] = $dizhi[$key]['region'];
+	       
+        }     
+
+        // var_dump($info);   
+        $this->assign('info', $info);  
+        // $this->assign('page', $page); 
 		return $this->fetch();
 	}
 	
