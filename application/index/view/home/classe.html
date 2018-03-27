@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<title> 发现音乐 </title>
+<meta name="Keywords" content="{_G['keywords']}" />
+<meta name="Description" content="{_G['description']}" />
+<link href="__HOME_PATH__/css/index.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/rank_music.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/tips.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/visitor.css" type="text/css" rel="stylesheet" />
+<style type="text/css">
+.mod_side_nav .current_{music['classid']}{color:#0c8f44;font-weight:bold;border-left:5px solid #F60}
+</style>
+<script type="text/javascript" src="__HOME_PATH__/js/jquery.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/menu.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/visitor.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/lib.js"></script>
+<script type="text/javascript">
+var in_path = '{_G['path']}';
+var temp_url = '__HOME_PATH__/';
+var search_url = '{rewrite['index.php/search/music/target/']}';
+var _menu = 'music';
+function display_tag(type) {
+   //
+    if( $('#tag_+type, ol').css('display') == 'none'){
+        console.log('#tag_'+type);
+                $('#tag_+type ,i').removeClass("icon_open");
+                $('#tag_+type ,i').addClass("icon_close");
+                $('#tag_+type ,ol').show();
+        } else {
+            
+                $('#tag_+type ,i').removeClass("icon_close");
+                $('#tag_+type ,i').addClass("icon_open");
+                $('#tag_+type ,ol').hide();
+    }
+    //$('#tag_+type,ol').show();
+    //tag.i.removeClass("icon_open");
+        
+}
+</script>
+</head>
+<body>
+<div class="frame_top">
+	{include file='base/top' /}
+</div>
+<div class="main_frame">
+	<div class="layout_1">
+		<div class="side_container">
+			<div class="mod_side_nav">
+				
+				<div class="gedan_sort">
+					 {volist name="cate" id="res"}
+                                        
+					<div >
+                                            {if condition="$res.level eq 0"}
+                                               <pp id="tag_{$res.c_id}">
+                                            	<h3><span>{$res.c_name}</span><i class="icon_open" onclick="display_tag({$res.c_id})"></i></h3>
+                                             {elseif condition="$res.level eq 1"}
+                                                <ol style="display:none">
+							<li><a href="{:url('classe',['id'=>$res['c_id']])}" target="_blank" title="{$res.c_name}">{$res.c_name}</a></li>	
+						</ol>
+                                                </pp>
+                                               {/if}
+					</div>
+                                        
+                                        {/volist}
+					
+					
+				</div>
+			</div>
+		</div>
+		<div class="main_container">
+			<div class="rank_title">
+				<h2>歌曲列表</h2>
+				<a href="javascript:player_index('class_list', 'ing');" class="btn_play" title="播放">播放</a><a href="javascript:player_index('class_list', 'add');" class="btn_add" title="添加">添加</a>
+				<p class="rank_music_info">
+					<strong>{page['data']} 首歌</strong>
+				</p>
+			</div>
+			<div class="music_list class_songlist">
+				<div class="music_list_cp">
+					<label for="checkall"><input type="checkbox" onclick="lib.quanxuan('class_list');" id="checkall">全选</label>
+				</div>
+				<ol id="class_list">
+                                    {volist name='data' id='val'}
+					<li onmouseover="this.className='play_hover'" onmouseout="this.className=''">
+                                            <input type="checkbox" value="{$val.id}">
+					
+                                      
+                                            <span class="rank_normal"></span>
+					<div class="music_name">
+						<span class="txt"><a href="{:url('music',['id'=>$val['id']])}" target="_blank" title="{$val.name}">{$val.name}</a></span>
+					</div>
+					<div class="singer_name">
+						<a href="{:url('singer',['id'=>$val['sid']])}" target="_blank" title="{$val.sname}">{$val.sname}</a>
+					</div>
+					<div class="count">
+						{if condition='$val.hit lt 10'}
+                                                <strong style="width:{$val.hit}0%;">
+                                                {else/}
+                                                    <strong style="width:100%;">
+                                                {/if}
+                                                    </strong>
+					</div>
+					<div class="list_cp">
+						<a href="javascript:player_index({$val.id}, 'ing');" title="播放" class="btn_play">播放</a><a href="javascript:player_index({music['id']}, 'add');" title="添加" class="btn_add">添加</a><a href="javascript:create_fav({music['id']});" title="收藏" class="btn_like">收藏</a>
+					</div>
+					<span class="play_time">{$val.update_time|date='Y-m-d H:i:s',###}</span></li>
+				{/volist}
+                                </ol>
+			</div>
+			<div class="mod_page">
+				<a href="{page['up']}" title="上一页" class="prev"><span>&lt;</span></a><a href="{page['first']}"><span>首页</span></a>{page['number 10']}<a href="{page['last']}"><span>尾页</span></a><a href="{page['down']}" title="下一页" class="next"><span>&gt;</span></a>
+				<!--{pagestyle <a href="[link]"><span>|<a class="current"><span>|</span></a>}-->
+			</div>
+		</div>
+	</div>
+</div>
+<!--{require 'bottom.html'}-->
+<!--{require 'tips.html'}-->
+<!--{require 'visitor.html'}-->
+</body>
+</html>

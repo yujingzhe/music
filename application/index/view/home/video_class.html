@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<title> - MV库 - </title>
+<meta name="Keywords" content="{_G['keywords']}" />
+<meta name="Description" content="{_G['description']}" />
+<link href="__HOME_PATH__/css/index.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/mv_list.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/tips.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/visitor.css" type="text/css" rel="stylesheet" />
+<style type="text/css">
+.mod_side_nav .current_{video['classid']}{color:#0c8f44;font-weight:bold;border-left:5px solid #F60}
+</style>
+<script type="text/javascript" src="__HOME_PATH__/js/jquery.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/menu.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/visitor.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/lib.js"></script>
+<script type="text/javascript">
+var in_path = '{_G['path']}';
+var temp_url = '__HOME_PATH__/';
+var search_url = '{rewrite['index.php/search/music/target/']}';
+var _menu = 'video';
+</script>
+</head>
+<body>
+<div class="frame_top">
+	{include file='base/top' /}
+</div>
+<div class="main_frame">
+	<div class="layout_1">
+		<div class="side_container">
+			<div class="mod_side_nav">
+				<ul>
+					{volist name='cate' id='val'}
+					<li><a href="{:url('video_class',['id'=>$val['id']])}" class="js_nav current_{videoclass['id']}">{$val.mv_name}</a></li>
+					{/volist}
+				</ul>
+			</div>
+		</div>
+		<div class="main_container">
+			<h2 class="mv_main_tt">MV列表</h2>
+			<div class="mv_list">
+				<ul>
+                                    {volist name='mv' id='val'}
+					<li><a class="mod_poster_160" href="{:url('video',['id'=>$val['id']])}" target="_blank" title="{$val.m_name}">
+                                                <img src="{$val.m_pic}"><span class="icon_play" onmouseover="this.className='icon_play icon_play_hover'" onmouseout="this.className='icon_play'"></span></a>
+					<p>
+						<a href="{:url('video',['id'=>$val['id']])}" target="_blank" class="mv_name" title="{$val.m_name}">{$val.m_name}</a>
+                                                
+                                                <strong class="grade">今日</strong>
+                                                
+					</p>
+					<p>
+						<a class="singer_name" href="{:url('singer',['id'=>$val['sid']])}" target="_blank" title="{$val.sname}">{$val.sname}</a>
+					</p>
+					<p>
+						<span class="count">{video['hits']}</span><span class="date">{$val.update_time|date='Y-m-d',###}</span>
+					</p>
+					</li>
+				{/volist}
+                                </ul>
+			</div>
+			<div class="mod_page">
+				<a href="{page['up']}" title="上一页" class="prev"><span>&lt;</span></a><a href="{page['first']}"><span>首页</span></a>{page['number 10']}<a href="{page['last']}"><span>尾页</span></a><a href="{page['down']}" title="下一页" class="next"><span>&gt;</span></a>
+				<!--{pagestyle <a href="[link]"><span>|<a class="current"><span>|</span></a>}-->
+			</div>
+		</div>
+	</div>
+</div>
+<!--{require 'bottom.html'}-->
+<!--{require 'tips.html'}-->
+<!--{require 'visitor.html'}-->
+</body>
+</html>

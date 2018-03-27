@@ -1,0 +1,178 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>个人资料</title>
+  <meta name="description" content="这是一个 user 页面">
+  <meta name="keywords" content="user">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="__HOME_PATH__/css/index.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/tips.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/visitor.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="__ROOT____HOME_PATH__/js/jquery.js"></script>
+<script type="text/javascript" src="__ROOT____HOME_PATH__/js/menu.js"></script>
+<script type="text/javascript" src="__ROOT____HOME_PATH__/js/visitor.js"></script>
+<script type="text/javascript" src="__ROOT____HOME_PATH__/js/index.js"></script>
+<script type="text/javascript" src="__ROOT____HOME_PATH__/js/lib.js"></script>
+  <link rel="stylesheet" href="__HOME_PATH__/user/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="__HOME_PATH__/user/css/admin.css">
+  
+   <link rel="stylesheet" href="__HOME_PATH__/user/css/layout0115.css">
+    <link rel="stylesheet" href="__HOME_PATH__/user/css/profile.css">
+
+</head>
+<body>
+
+
+<div class="frame_top">
+	{include file='base/top' /}
+	
+</div>
+<div class="main main--profile" style="">
+      
+
+		<div class="js_box" id="like_box" style="display: block;">
+			<div class="mod_tab" role="nav">
+				<a class="mod_tab__item " href="{:url('usersong')}" data-tab="like_song" data-stat="y_new.profile.like.tab.song">收藏歌曲</a>
+				
+				<a class="mod_tab__item mod_tab__current" href="{:url('userinfo')}" data-tab="like_album" data-stat="y_new.profile.like.tab.album">个人资料</a>
+				<a class="mod_tab__item " href="{:url('repassword')}" data-tab="like_mv" data-stat="y_new.profile.like.tab.mv">修改密码</a>
+			</div>
+			<div class="profile_cont">
+				<div class="js_sub" id="like_song_box" style="display: block;">
+                        <div class="mod_songlist_toolbar">
+                         </div>
+    
+    
+<div class="am-cf admin-main">
+ 
+  <div class="admin-content">
+   
+
+
+
+    <div class="am-g">
+
+      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+        <div class="am-panel am-panel-default">
+          <div class="am-panel-bd">
+            <div class="am-g">
+                {if condition="$Think.session.pic eq null"}
+                <div class="am-u-md-4">
+                    <img class="am-img-circle am-img-thumbnail" src="" alt=""/>
+                </div>
+                {else/}
+                <div class="am-u-md-4">
+                <img class="am-img-circle am-img-thumbnail" src="{$Think.session.pic}" alt=""/>
+              </div>
+                {/if}
+              
+              <div class="am-u-md-8">
+                <p>你可以使用<a href="#">系统</a>提供的默认头像或者使用本地上传头像。 </p>
+                <form class="am-form" action='dopic' method="post">
+                  <div class="am-form-group">
+                    <input type="file" id="user-pic">
+                    <p class="am-form-help">请选择要上传的文件...</p>
+                    <input type="submit" class="am-btn am-btn-primary am-btn-xs" value="保存">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="am-panel am-panel-default">
+          <div class="am-panel-bd">
+            <div class="user-info">
+              <p>等级信息</p>
+              <div class="am-progress am-progress-sm">
+                  {if condition="$Think.session.gold lt 100"}
+                <div class="am-progress-bar" style="width: {$Think.session.gold}%"></div>
+                {else/}
+                 <div class="am-progress-bar" style="width:0%"></div>
+                 {/if}
+              </div>
+              <p class="user-info-order">当前等级：<strong>LV8</strong> 活跃天数：<strong>587</strong> 距离下一级别：<strong>160</strong></p>
+            </div>
+            <div class="user-info">
+              <p>信用信息</p>
+              <div class="am-progress am-progress-sm">
+                <div class="am-progress-bar am-progress-bar-success" style="width: 80%"></div>
+              </div>
+              <p class="user-info-order">信用等级：正常当前 信用积分：<strong>{$Think.session.gold}</strong></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+        <form class="am-form am-form-horizontal" action="{:url('doinfo')}" method="post">
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">姓名 / Name</label>
+            <div class="am-u-sm-9">
+              <input type="text" id="user-name" placeholder="{$info.name}" name='name'>
+              <small>输入你的名字，让我们记住你。</small>
+            </div>
+          </div>
+
+<!--          <div class="am-form-group">
+            <label for="user-email" class="am-u-sm-3 am-form-label">电子邮件 / Email</label>
+            <div class="am-u-sm-9">
+              <input type="email" id="user-email" placeholder="{$Think.session.email}" name='email'>
+              <small>邮箱你懂得...</small>
+            </div>
+          </div>-->
+
+          <div class="am-form-group">
+            <label for="user-phone" class="am-u-sm-3 am-form-label">电话 / Telephone</label>
+            <div class="am-u-sm-9">
+                <input type="text" name="tel" id="user-phone" placeholder="{$info.tel}">
+                <small>电话你懂得...</small>
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <label for="user-QQ" class="am-u-sm-3 am-form-label">QQ</label>
+            <div class="am-u-sm-9">
+              <input type="text" name='qq' id="user-QQ" placeholder="{$info.qq}">
+              <small>留个QQ呗...</small>
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <label for="user-weibo" class="am-u-sm-3 am-form-label">地址 / Address</label>
+            <div class="am-u-sm-9">
+                <input type="text" name="address" id="user-weibo" placeholder="{$info.address}">
+                <small>面基不...</small>
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <label for="user-intro" class="am-u-sm-3 am-form-label">简介 / Intro</label>
+            <div class="am-u-sm-9">
+              <textarea class="" rows="5" name='gq' id="user-intro" placeholder="{$info.gq}"></textarea>
+              <small>250字以内写出你的一生...</small>
+            </div>
+          </div>
+
+          <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+              <input type="submit" class="am-btn am-btn-primary" value='保存'/>
+            </div>
+          </div>
+        </form>
+      </div>
+              
+                             </div>
+			</div>
+		</div>
+	
+		
+    </div>
+{include file='base/bottom' /}
+{include file='base/tips' /}
+
+</body>
+</html>

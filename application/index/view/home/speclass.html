@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<title>精选辑</title>
+<meta name="Keywords" content="{_G['keywords']}" />
+<meta name="Description" content="{_G['description']}" />
+<link href="__HOME_PATH__/css/index.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/album_list.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/tips.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/visitor.css" type="text/css" rel="stylesheet" />
+<style type="text/css">
+.mod_side_nav .current_{special['classid']}{color:#0c8f44;font-weight:bold;border-left:5px solid #F60}
+</style>
+<script type="text/javascript" src="__HOME_PATH__/js/jquery.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/menu.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/visitor.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/lib.js"></script>
+<script type="text/javascript">
+var in_path = '{_G['path']}';
+var temp_url = '__HOME_PATH__/';
+var search_url = '{rewrite['index.php/search/music/target/']}';
+var _menu = 'music';
+</script>
+</head>
+<body>
+<div class="frame_top">
+	{include file='base/top' /}
+</div>
+<div class="main_frame">
+	<div class="layout_1">
+		<div class="side_container">
+			<div class="mod_side_nav">
+				<ul>
+					{volist name='res' id='lis'}
+                                        <li><a href="{:url('speclass',['id'=>$lis['zid']])}" class="js_nav current_{$lis.zid}">{$lis.name}</a></li>
+					{/volist}
+				</ul>
+			</div>
+		</div>
+		<div class="main_container">
+			<h2 class="album_main_tt">专辑列表</h2>
+			<div class="album_index_list">
+				<ul>
+                                    {volist name='data' id='val'}
+					<li>
+					<a href="{:url('special',['id'=>$val['zid']])}" target="_blank" title="{special['name']}" class="mod_poster_130"><img src="{$val.spic}"><span class="icon_play" onmouseover="this.className='icon_play icon_play_hover'" onmouseout="this.className='icon_play'"></span></a>
+					<h5><a href="{:url('special',['id'=>$val['zid']])}" target="_blank" title="{$val.aname}">{$val.aname}</a></h5>
+					<p>
+						<a href="{special['singerlink']}" target="_blank" title="{$val.sname}">{$val.sname}</a>
+					</p>
+					</li>
+				{/volist}
+                                </ul>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<!--{require 'bottom.html'}-->
+<!--{require 'tips.html'}-->
+<!--{require 'visitor.html'}-->
+</body>
+</html>

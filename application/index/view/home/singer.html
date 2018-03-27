@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<title>{$data.sname} - {$data.aname}</title>
+<meta name="Keywords" content="{_G['keywords']}" />
+<meta name="Description" content="{_G['description']}" />
+<link href="__HOME_PATH__/css/index.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/singer_detail.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/tips.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/visitor.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__HOME_PATH__/js/jquery.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/menu.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/visitor.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/lib.js"></script>
+<script type="text/javascript">
+var in_path = '{_G['path']}';
+var temp_url = '__HOME_PATH__/';
+var search_url = '{rewrite['index.php/search/music/target/']}';
+var _menu = 'music';
+</script>
+</head>
+<body>
+<div class="frame_top">
+	{include file='base/top' /}
+</div>
+<div class="main_frame">
+	<div class="layout_2">
+		<div class="main_container">
+			<div class="singer_title"><h2>{$data.sname}</h2></div>
+			<div class="music_list_frame">
+				<div class="title">
+					<h3>TA的单曲</h3>
+					<a href="javascript:player_index('songlist', 'ing');" class="btn_play" title="播放">播放</a><a href="javascript:player_index('songlist', 'add');" class="btn_add" title="添加">添加</a>
+				</div>
+				<div class="music_list class_songlist">
+					<ol id="songlist">
+                                            {volist name='music' id='val'}
+                                            <input style="display:none" type="checkbox" value="{$val.id}" checked>
+						<li onmouseover="this.className='play_hover'" onmouseout="this.className=''">
+							<div class="music_name"><span class="txt"><a href="{:url('music',['id'=>$val['id']])}" title="{music['name']}">{$val.name}</a></span></div>
+							<a class="album_name" href="" title="{$val.username}">{$val.username}</a>
+							<div class="count">
+                                                            
+                                                            {if condition='$val.good lt 10'}
+                                                            <strong style="width:{$val.good}0%;">
+                                                                {else/}
+                                                                <strong style="width:100%;">
+                                                                {/if}
+                                                                </strong></div>
+							<div class="list_cp"><a href="javascript:player_index({$val.id}}, 'ing');" title="播放" class="btn_play">播放</a><a href="javascript:player_index({music['id']}, 'add');" title="添加" class="btn_add">添加</a><a href="javascript:create_fav({music['id']});" title="收藏" class="btn_like">收藏</a></div>
+							<span class="play_time">{$val.create_time|date="Y-m-d H:i:s",###}</span>
+						</li>
+					{/volist}
+                                        </ol>
+				</div>
+			</div>
+			<div class="album_list_frame">
+				<div class="title">
+					<h3>TA的专辑</h3>
+				</div>
+				<div class="album_list">
+					<ul> {volist name='ab' id='a'}
+						<li><a class="mod_poster_130" href="{:url('special',['id'=>$a['id']])}" target="_blank" title="{$a.aname}">
+                                                        <img src="{$a.pic}">
+                                                        <span class="icon_play" onmouseover="this.className='icon_play icon_play_hover'" onmouseout="this.className='icon_play'"></span>
+                                                    </a>
+                                                        <p class="album_name">
+                                                            <a href="{:url('special',['id'=>$a['id']])}" target="_blank" class="album_name" title="{$a.aname}">{$a.aname}</a>
+                                                        </p>
+                                                </li>
+					{/volist}
+                                        </ul>
+				</div>
+			</div>
+			<div class="mv_list_frame">
+				<div class="title">
+					<h3>TA的MV</h3>
+				</div>
+				<div class="mv_list">
+					<ul>{volist name='mv' id='m'}
+						<li><a class="mod_poster_160" href="{:url('video',['id'=>$m['id']])}" title="{$m.m_name}"><img src="{$m.m_pic}">
+                                                        <span class="icon_play" onmouseover="this.className='icon_play icon_play_hover'" onmouseout="this.className='icon_play'"></span></a>
+                                                        <p class="mv_name">
+                                                            <a href="{:url('video',['id'=>$m['id']])}" target="_blank" class="mv_name" title="{video['name']}">{$m.m_name}</a>
+                                                        </p>
+                                                        <p><span class="count">{$m.hit}</span>
+                                                            <span class="date">{$m.create_time}</span>
+                                                        </p>
+                                                </li>
+                                            {/volist}
+                                        </ul>
+				</div>
+			</div>
+		</div>
+		<div class="side_container">
+			<div class="side_singer_show">
+				<img src="{$data.spic}" width="220" height="220">
+			</div>
+			<div class="mod_singer_file">
+				<div class="title">
+					<h3>歌手档案</h3>
+				</div>
+				<div class="mod_content">
+					<p class="file_details">
+						{$data.jianjie}
+					</p>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<!--{require 'bottom.html'}-->
+<!--{require 'tips.html'}-->
+<!--{require 'visitor.html'}-->
+</body>
+</html>

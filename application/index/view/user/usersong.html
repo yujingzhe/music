@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)https://y.qq.com/portal/profile.html#sub=song&tab=like& -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta http-equiv="Content-Language" content="zh-cn">
+ 
+    <meta name="mobile-agent" content="format==[html5];url=//m.y.qq.com">
+    <meta name="applicable-device" content="pc">
+    <title>我的音乐</title>
+    <script type="text/javascript" src="__ROOT____HOME_PATH__/js/jquery.js"></script>
+<script type="text/javascript" src="__ROOT____HOME_PATH__/js/menu.js"></script>
+<script type="text/javascript" src="__ROOT____HOME_PATH__/js/visitor.js"></script>
+<script type="text/javascript" src="__ROOT____HOME_PATH__/js/index.js"></script>
+<script type="text/javascript" src="__ROOT____HOME_PATH__/js/lib.js"></script>
+    <link href="__HOME_PATH__/css/index.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/tips.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/visitor.css" type="text/css" rel="stylesheet" />
+          
+
+    <link rel="stylesheet" href="__HOME_PATH__/user/css/layout0115.css">
+    <link rel="stylesheet" href="__HOME_PATH__/user/css/profile.css">
+
+<style type="text/css">.emojicon-m {min-height: 1em !important; min-width: 1em !important; max-height: 1em !important;max-width: 1em !important;vertical-align: middle !important;float: none !important;background-repeat:no-repeat;background-position:center center;	background-size: contain;display: inline-block;}</style><style type="text/css">.emojicon-m {min-height: 1em !important; min-width: 1em !important; max-height: 1em !important;max-width: 1em !important;vertical-align: middle !important;float: none !important;background-repeat:no-repeat;background-position:center center;	background-size: contain;display: inline-block;}</style></head>
+<body class="os_mac">
+
+      <div class="frame_top">
+	{include file='base/top' /}
+	
+</div>
+
+    <div class="main main--profile" style="">
+      
+
+		<div class="js_box" id="like_box" style="display: block;">
+			<div class="mod_tab" role="nav">
+				<a class="mod_tab__item mod_tab__current" href="{:url('usersong')}" data-tab="like_song" data-stat="y_new.profile.like.tab.song">收藏歌曲 {$count}</a>
+				
+				<a class="mod_tab__item" href="{:url('userinfo')}" data-tab="like_album" data-stat="y_new.profile.like.tab.album">个人资料</a>
+				<a class="mod_tab__item" href="{:url('repassword')}" data-tab="like_mv" data-stat="y_new.profile.like.tab.mv">修改密码</a>
+			</div>
+			<div class="profile_cont">
+				<div class="js_sub" id="like_song_box" style="display: block;">
+                        <div class="mod_songlist_toolbar">
+                                <a href="javascript:;" class="mod_btn_green js_all_play" data-stat="y_new.profile.like.song.playall"><i class="mod_btn_green__icon_play"></i>播放全部</a>
+                                
+                                <a href="javascript:;" class="mod_btn js_batch" data-stat="y_new.profile.like.song.batch"><i class="mod_btn__icon_batch"></i>批量操作</a>
+                        </div>
+                                <div class="mod_songlist">
+                                        <ul class="songlist__header">
+                                            <li class="songlist__edit songlist__edit--check sprite">
+                                                <input type="checkbox" class="songlist__checkbox js_check_all">
+                                            </li>
+                                                <li class="songlist__header_name">歌曲</li>
+                                                <li class="songlist__header_author">歌手</li>
+                                                <li class="songlist__header_album">时间</li>
+                                                <li class="songlist__header_time">操作</li>
+                                        </ul>
+                                        <ul class="songlist__list">
+                                            {volist name='res' id='val'}
+                                        <li mid="182509" ix="0">
+                                                <div class="songlist__item" onmouseover="this.className=(this.className+&#39; songlist__item--hover&#39;)" onmouseout="this.className=this.className.replace(/ songlist__item--hover/, &#39;&#39;)">
+                                                    
+                                                    <div class="songlist__songname">
+
+                                                        <span class="songlist__songname_txt"><a href="{:url('Index/music',['id'=>$val['id']])}" class="js_song" title="{$val.name}">
+                                                                {$val.name}
+                                                                <span class="songlist__song_txt">{$val.jianjie}</span></a></span>
+
+                                                    </div>
+                                                    <div class="songlist__artist">
+
+
+                                                        <a href="{:url('Index/singer',['id'=>$val['sid']])}" data-singermid="000nIDDz03kG0q" data-singerid="5496" title="{$val.sname}" class="singer_name">{$val.sname}</a>
+
+                                                    </div>
+                                                    <div class="songlist__album">
+                                                        <a data-albummid="004ZhS3h2hvImo" data-albumid="15739" class="album_name">{$val.update_time|date='Y-m-d',###}</a>
+                                                    </div>
+                                                    <div class="songlist__time">已收藏</div>
+
+                                                    <a href="{:url('Index/nolike',['id'=>$val['id']])}" class="songlist__delete js_delfav_song" data-id="182509" title="删除"><img src="__HOME_PATH__/images/5.png" /></a>
+                                                </div>
+                                        </li>
+                                        {/volist}
+
+                                        </ul>
+                                </div>
+                             </div>
+			</div>
+		</div>
+	
+		
+    </div>
+{include file='base/bottom' /}
+{include file='base/tips' /}
+
+
+</body></html>

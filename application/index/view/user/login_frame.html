@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户登录 - 半夏音乐</title>
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<link href="__HOME_PATH__/css/login_v2.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/h_qr_login_2.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/tips.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__STATIC_PATH__/pack/layer/jquery.js"></script>
+<script type="text/javascript" src="__STATIC_PATH__/pack/layer/lib.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/lib.js"></script>
+
+</head>
+<body>
+<div class="header">
+	<h1><a href="{}" target="_top">半夏音乐</a></h1>
+	<div class="mini_nav">
+		<a href="{:url('index/index')}" target="_top">网站首页</a>
+                
+	</div>
+</div>
+<div class="mod_main">
+	<div class="decorate_pic">
+		<img src="__HOME_PATH__/css/banner.jpg" width="518" height="310">
+	</div>
+	<div class="mod_login">
+		<div class="login_box">
+			<div class="login_no_qlogin">
+				<div class="header">
+					<div class="switch">
+						<a class="switch_btn_focus">帐号登录</a>
+					</div>
+				</div>
+				<div class="web_qr_login" style="height: 265px;">
+					<div class="web_qr_login_show">
+						<div class="web_login">
+							<div class="login_form">
+								<form method="post">
+									<div class="uinArea">
+										<label class="input_tips" id="i_username">用户名</label>
+										<div class="inputOuter">
+											<input type="text" class="inputstyle" name='name' id="username" required onclick="document.getElementById('i_username').style.display = 'none'">
+										</div>
+									</div>
+									<div class="pwdArea">
+										<label class="input_tips" id="i_password">密码</label>
+										<div class="inputOuter">
+											<input type="password" name='pwd' class="inputstyle password" id="password" required onclick="document.getElementById('i_password').style.display = 'none'">
+										</div>
+									</div>
+									<div class="verifyArea">
+										<div class="verifyinputArea">
+											<label class="input_tips" id="i_seccode">验证码</label>
+											<div class="inputOuter">
+												<input type="text" name='code' class="inputstyle verifycode" id="seccode" required onclick="document.getElementById('i_seccode').style.display = 'none'">
+											</div>
+										</div>
+										<div class="verifyimgArea">
+											<img id="img_seccode" src="{:captcha_src()}" alt='captcha' onclick='this.src=this.src' align="absmiddle" >
+                                                                                        <a href="javascript:update_seccode();" class="verifyimg_tips">更换</a>
+                                                                                        <a href="{:url('lostpasswd')}" target="_top" class="verifyimg_tips">忘了密码？</a>
+										</div>
+									</div>
+									<div class="submit">
+                                                                            <a class="login_button"><button type="submit" class="btn" id="login">登&nbsp;&nbsp; 录</button></a>
+									</div>
+								</form>
+							</div>
+							<div class="bottom">
+								<a href='{$code_url}' style="cursor:pointer" title="微博登录" ><img src="__STATIC_PATH__/user/images/weibo_login.png" style='width:150px; height:35px;; margin:-7px;'/></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{include file='base/tips' /}
+</body>
+</html>
+<script type="text/javascript">
+     $('#login').click(function () {
+        var name = $('input[name=name]').val();
+        var pwd = $('input[name=pwd]').val();
+        var code = $('input[name=code]').val();
+
+        
+        // ajax请求
+       $.post('{:url("dologin")}', {name:name,pwd:pwd,code:code}, function(data){
+           if (data == 1) {
+                alert("用户名不存在");
+           } else if (data == 2) {
+               alert("密码错误");
+           } else if (data == 4) {
+               alert("验证码错误");
+           }  else if (data == 3) {
+            parent.location.href ='{:url("Index/index")}';
+           }
+        
+        });
+        return false;
+    });
+   
+</script>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<title>注册帐号 - {_G['name']}</title>
+<meta name="Keywords" content="{_G['keywords']}" />
+<meta name="Description" content="{_G['description']}" />
+<link href="__HOME_PATH__/css/index.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/music_dir.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/tips.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__HOME_PATH__/js/jquery.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/menu.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/lib.js"></script>
+
+</head>
+<body>
+<div class="frame_top">
+	{include file='base/top' /}
+</div>
+<div class="main_frame">
+	<div class="layout_1">
+		<div class="mod_music_dir">
+			<div class="title">
+				<h2>创建帐号</h2>
+			</div>
+			<div class="mod_content">
+				
+				<form method="post" >
+					<div class="fill_box">
+						<span class="box_title">创建帐号：</span>
+						<div class="form_element">
+                                                    <input type="text" class="text_box" id="username" name='name' onblur='check_name()'/>
+							<span class="select_num" id="name_tips"></span>
+						</div>
+					</div>
+					<div class="fill_box">
+						<span class="box_title">设置密码：</span>
+						<div class="form_element">
+                                                    <input type="password" class="text_box" id="password" name="pwd" onblur='check_pwd()' />
+							<span class="select_num" id="password_tips">最小长度为 6 个字符。</span>
+						</div>
+					</div>
+					<div class="fill_box">
+						<span class="box_title">确认密码：</span>
+						<div class="form_element">
+							<input type="password" class="text_box" id="repassword" name='repwd' onblur='check_repwd()'/>
+							<span class="select_num" id="repassword_tips"></span>
+						</div>
+					</div>
+					<div class="fill_box">
+						<span class="box_title">邮箱：</span>
+						<div class="form_element">
+							<input type="text" class="text_box" id="mail" name='email'/>
+							<span class="select_num" id="mail_tips">请准确填入您的邮箱，在忘记密码时，邮箱将帮助你找回密码。</span>
+						</div>
+					</div>
+					
+					<div class="music_dir_op">
+						<input type="submit" id='register' class="btn_cancel" value="创建帐号" />
+					</div>
+				</form>
+				
+<!--				<div class="mod_warning one_line"><i class="icon_warning"></i><p class="warning_info">本站暂未开放注册，请稍后再试！</p></div>-->
+				
+			</div>
+		</div>
+	</div>
+</div>
+{include file='base/bottom' /}
+{include file='base/tips' /}
+
+</body>
+</html>
+<script type="text/javascript">
+    function check_name(){
+      //console.log(1);
+      //获取账号
+      var name =
+        document.getElementById("username").value;
+      //校验其格式(\w字母或数字或下划线)
+      
+      var span =
+        document.getElementById("name_tips");
+     
+     $.post('{:url("docheck")}', {name:name}, function(data){
+         console.log(data);
+           if (data == 1) {
+                span.innerHTML = "✘ 【用户名已存在】";
+                span.style.color = 'red';
+           } else if (data == 2) {
+                span.innerHTML = "✔";
+                span.style.color = 'green';
+           }
+        });
+        return false;
+    }
+    
+    function check_pwd() {
+      //console.log(1);
+      //获取账号
+      var code =
+        document.getElementById("password").value;
+      //校验其格式(\w字母或数字或下划线)
+      //console.log(code);
+      var span =
+        document.getElementById("password_tips");
+      var reg = /^\w{6,10}$/;
+      if(reg.test(code)) {
+        //通过，增加ok样式
+        span.innerHTML = '✔';
+        span.style.color = 'green';
+      } else {
+        //不通过，增加error样式
+        span.innerHTML = "✘ 【至少六位，不能有下划线之外的字符 OK？】";
+        span.style.color = 'red';
+        
+      }
+    }
+    function check_repwd() {
+      //console.log(1);
+      //获取账号
+      var recode =
+        document.getElementById("repassword").value;
+      //校验其格式(\w字母或数字或下划线)
+      var code =
+        document.getElementById("password").value;
+      console.log(code);
+      var span =
+        document.getElementById("repassword_tips");
+     
+      if(code == recode) {
+        //通过，增加ok样式
+        span.innerHTML = '✔';
+        span.style.color = 'green';
+      } else {
+        //不通过，增加error样式
+        span.innerHTML = "✘ 【前后密码不一致】";
+        span.style.color = 'red';
+        
+      }
+    }
+    
+     $('#register').click(function () {
+        var name = $('input[name=name]').val();
+        var pwd = $('input[name=pwd]').val();
+        var email = $('input[name=email]').val();
+
+        
+        // ajax请求
+       $.post('{:url("doregister")}', {name:name,pwd:pwd,email:email}, function(data){
+           if (data == 2) {
+                alert("注册失败");
+           } else {
+            window.location.href ='{:url("User/login")}';
+           }
+        
+        });
+        return false;
+    });
+   
+</script>

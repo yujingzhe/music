@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<title>忘记密码 - {_G['name']}</title>
+<meta name="Keywords" content="{_G['keywords']}" />
+<meta name="Description" content="{_G['description']}" />
+<link href="__HOME_PATH__/css/index.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/music_dir.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/tips.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__HOME_PATH__/js/jquery.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/menu.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/lib.js"></script>
+<script type="text/javascript">
+var in_path = '{_G['path']}';
+var temp_url = '__HOME_PATH__/';
+var search_url = '{rewrite['index.php/search/music/target/']}';
+var _menu = 'music';
+function update_seccode(){
+	document.getElementById('img_seccode').src = '{rewrite['user.php/people/seccode/' + Math.random() + '/']}';
+}
+</script>
+</head>
+<body>
+<div class="frame_top">
+	{include file='base/top' /}
+	
+</div>
+<div class="main_frame">
+	<div class="layout_1">
+		<div class="mod_music_dir">
+			<div class="title">
+				<h2>找回密码</h2>
+			</div>
+			<div class="mod_content">
+				<form method="get" onsubmit="lostpasswd(1);return false;">
+					<div class="fill_box">
+						<span class="box_title">用户名：</span>
+						<div class="form_element">
+							<input type="text" class="text_box" id="username" />
+							<span class="select_num" id="username_tips"></span>
+						</div>
+					</div>
+					<div class="fill_box">
+						<span class="box_title">邮箱：</span>
+						<div class="form_element">
+							<input type="text" class="text_box" id="mail" />
+							<span class="select_num" id="mail_tips">请输入您注册时填写的邮箱。</span>
+						</div>
+					</div>
+					<div class="fill_box">
+						<span class="box_title">验证码：</span>
+						<div class="form_element">
+							<input type="text" class="text_box" id="seccode" />
+							<span class="select_num"><img id="img_seccode" src="{rewrite['user.php/people/seccode/']}" align="absmiddle" /><a href="javascript:update_seccode()">更换</a><i id="seccode_tips"></i></span>
+						</div>
+					</div>
+					<div class="music_dir_op">
+						<input type="submit" class="btn_cancel" value="找回密码" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+    {include file='base/bottom' /}
+{include file='base/tips' /}
+<!--{require 'bottom.html'}-->
+<!--{require 'tips.html'}-->
+</body>
+</html>

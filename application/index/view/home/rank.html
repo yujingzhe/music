@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<title>排行榜 - 发现音乐 - {_G['name']}</title>
+<meta name="Keywords" content="{_G['keywords']}" />
+<meta name="Description" content="{_G['description']}" />
+<link href="__HOME_PATH__/css/index.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/rank_index.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/tips.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/visitor.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__HOME_PATH__/js/jquery.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/menu.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/visitor.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/lib.js"></script>
+<script type="text/javascript">
+var in_path = '';
+var temp_url = '__HOME_PATH__/';
+var search_url = 'index.php/search/music/target/';
+var _menu = 'music';
+function display_tag(type) {
+   //
+    if( $('#tag_+type, ol').css('display') == 'none'){
+        console.log('#tag_'+type);
+                $('#tag_+type ,i').removeClass("icon_open");
+                $('#tag_+type ,i').addClass("icon_close");
+                $('#tag_+type ,ol').show();
+        } else {
+            
+                $('#tag_+type ,i').removeClass("icon_close");
+                $('#tag_+type ,i').addClass("icon_open");
+                $("#tag_" + type + " ol").hide();
+    }
+    //$('#tag_+type,ol').show();
+    //tag.i.removeClass("icon_open");
+        
+}
+</script>
+</head>
+<body>
+<div class="frame_top">
+	{include file='base/top' /}
+</div>
+<div class="main_frame">
+	<div class="layout_1">
+		<div class="side_container">
+			<div class="mod_side_nav">
+				
+                                <ul>
+					<li><a href="" class="js_nav current">排行榜</a></li>
+					
+                                        <li><a href="#1f" class="js_nav">最新排行</a></li>
+                                        <li><a href="#2f" class="js_nav">一周推荐</a></li>
+                                        <li><a href="#3f" class="js_nav">最热排行</a></li>
+                                        <li><a href="#4f" class="js_nav">好评排行</a></li>
+                                       
+                                      
+				</ul>
+				<div class="gedan_sort">
+                                    {volist name="cate" id="res"}
+                                        
+					<div >
+                                            {if condition="$res.level eq 0"}
+                                               <pp id="tag_{$res.c_id}">
+                                            	<h3><span>{$res.c_name}</span><i class="icon_open" onclick="display_tag({$res.c_id})"></i></h3>
+                                             {elseif condition="$res.level eq 1"}
+                                                <ol style="display:none">
+							<li><a href="{:url('classe',['id'=>$res['c_id']])}" target="_blank" title="{$res.c_name}">{$res.c_name}</a></li>	
+						</ol>
+                                                </pp>
+                                               {/if}
+					</div>
+                                        
+                                        {/volist}
+					
+				</div>
+			</div>
+		</div>
+		<div class="main_container">
+			<h2 class="rank_main_tt">排行榜</h2>
+			<div class="rank_frame">
+				<div class="rank_list">
+					<div class="rank_list_title">
+						<h3  id='1f'>最新排行&nbsp;&nbsp;</h3>
+						<a href="javascript:player_index('rank_new', 'ing');" class="btn_play" title="播放">播放</a><a href="javascript:player_index('rank_new', 'add');" class="btn_add" title="添加">添加</a>
+					</div>
+					<div class="class_songlist">
+						<ol id="rank_new">
+							<!--{loop music count=10}-->
+                                                        {volist name="music" id="val"}
+                                                        <input style="display:none" type="checkbox" value="{$val.id}" checked>
+							<li onmouseover="this.className='play_hover'" onmouseout="this.className=''">
+							
+                                                     
+                                                           
+                                                            <span class="rank_normal">
+                                                               </span>
+							<div class="music_info">
+							<span class="music_name">
+                                                            <a href="{:url('music',['id'=>$val['id']])}" target="_blank" title="{$val.name}">{$val.name}</a></span>
+							<span class="singer_name">
+                                                            <a href="{:url('singer',['id'=>$val['sid']])}" target="_blank" title="{$val.sname}">{$val.sname}</a></span>
+							</div>
+							<div class="list_cp">
+								<a href="javascript:player_index({$val.id}, 'ing');" title="播放" class="btn_play">播放</a>
+                                                                <a href="javascript:player_index({$val.id}, 'add');" title="添加" class="btn_add">添加</a>
+                                                                <a href="{:url('like',['id'=>$val['id']])}" title="收藏" class="btn_like">收藏</a>
+							</div>
+							</li>
+                                                        {/volist}
+							<!--{/loop music}-->
+						</ol>
+					</div>
+				</div>
+				<div class="rank_list">
+					<div class="rank_list_title">
+						<h3  id='2f'>最热排行&nbsp;&nbsp;</h3>
+						<a href="javascript:player_index('rank_hot', 'ing');" class="btn_play" title="播放">播放</a><a href="javascript:player_index('rank_hot', 'add');" class="btn_add" title="添加">添加</a>
+					</div>
+					<div class="class_songlist">
+						<ol id="rank_hot">
+                                                     {volist name="hit" id="val"}
+							<!--{loop music count=10 sort=hits}-->
+                                                        <input style="display:none" type="checkbox" value="{music['id']}" checked>
+							<li onmouseover="this.className='play_hover'" onmouseout="this.className=''">
+							<span class="rank_normal"></span>
+							<div class="music_info">
+							<span class="music_name"><a href="{url('music',['id'=>$val['id']])}" target="_blank" title="{$val.name}">{$val.name}</a></span>
+							<span class="singer_name"><a href="{:url('singer',['id'=>$val['sid']])}" target="_blank" title="{$val.sname}">{$val.sname}</a></span>
+							</div>
+							<div class="list_cp">
+								<a href="javascript:player_index({music['id']}, 'ing');" title="播放" class="btn_play">播放</a><a href="javascript:player_index({music['id']}, 'add');" title="添加" class="btn_add">添加</a><a href="javascript:create_fav({music['id']});" title="收藏" class="btn_like">收藏</a>
+							</div>
+							</li>
+                                                        {/volist}
+							<!--{/loop music}-->
+						</ol>
+					</div>
+				</div>
+				<div class="rank_list">
+					<div class="rank_list_title">
+						<h3  id='3f'>好评排行&nbsp;&nbsp;</h3>
+						<a href="javascript:player_index('rank_good', 'ing');" class="btn_play" title="播放">播放</a><a href="javascript:player_index('rank_good', 'add');" class="btn_add" title="添加">添加</a>
+					</div>
+					<div class="class_songlist">
+						<ol id="rank_good">
+							{volist name='good' id='val'}
+                                                        <input style="display:none" type="checkbox" value="{$val.id}" checked>
+							<li onmouseover="this.className='play_hover'" onmouseout="this.className=''">
+							<span class="rank_up"></span>
+							<div class="music_info">
+							<span class="music_name"><a href="{url('music',['id'=>$val['id']])}" target="_blank" title="{$val.name}">{$val.name}</a></span>
+							<span class="singer_name"><a href="{:url('singer',['id'=>$val['sid']])}" target="_blank" title="{$val.sname}">{$val.sname}</a></span>
+							</div>
+							<div class="list_cp">
+								<a href="javascript:player_index({music['id']}, 'ing');" title="播放" class="btn_play">播放</a><a href="javascript:player_index({music['id']}, 'add');" title="添加" class="btn_add">添加</a><a href="javascript:create_fav({music['id']});" title="收藏" class="btn_like">收藏</a>
+							</div>
+							</li>
+							{/volist}
+						</ol>
+					</div>
+				</div>
+				
+				<div class="rank_list">
+					<div class="rank_list_title">
+						<h3  id='4f'>一周推荐&nbsp;&nbsp;</h3>
+						<a href="javascript:player_index('rank_fav', 'ing');" class="btn_play" title="播放">播放</a><a href="javascript:player_index('rank_fav', 'add');" class="btn_add" title="添加">添加</a>
+					</div>
+					<div class="class_songlist">
+						<ol id="rank_fav">
+							{volist name='wek' id='val'}
+                                                    <input style="display:none" type="checkbox" value="{music['id']}" checked>
+							<li onmouseover="this.className='play_hover'" onmouseout="this.className=''">
+							<div class="music_info">
+							<span class="music_name"><a href="{url('music',['id'=>$val['id']])}" target="_blank" title="{$val.name}">{$val.name}</a></span>
+							<span class="singer_name"><a href="{:url('singer',['id'=>$val['sid']])}" target="_blank" title="{$val.sname}">{$val.sname}</a></span>
+							</div>
+							<div class="list_cp">
+								<a href="javascript:player_index({music['id']}, 'ing');" title="播放" class="btn_play">播放</a><a href="javascript:player_index({music['id']}, 'add');" title="添加" class="btn_add">添加</a><a href="javascript:create_fav({music['id']});" title="收藏" class="btn_like">收藏</a>
+							</div>
+							</li>
+                                                        {/volist}
+						</ol>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+{include file='base/bottom' /}
+{include file='base/tips' /}
+{include file='base/visitor' /}
+</body>
+</html>

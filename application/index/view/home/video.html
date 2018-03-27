@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<title>{$mv.m_name}</title>
+<meta name="Keywords" content="{_G['keywords']}" />
+<meta name="Description" content="{_G['description']}" />
+<link href="__HOME_PATH__/css/index.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/song_details.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/tips.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/visitor.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__HOME_PATH__/js/jquery.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/html5media.min.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/menu.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/visitor.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/lib.js"></script>
+<script type="text/javascript">
+var in_path = '{_G['path']}';
+var temp_url = '__HOME_PATH__/';
+var search_url = '{rewrite['index.php/search/music/target/']}';
+var _menu = 'video';
+</script>
+</head>
+<body>
+<div class="frame_top">
+	{include file='base/top' /}
+</div>
+<div class="main_frame">
+	<div class="layout_2">
+		<div class="main_container">
+			<div class="song_title" style="height:auto;">
+				<h2><span>{$mv.m_name}</span></h2>
+				<div class="opertate">
+					<a class="btn_down" style="cursor:pointer;" title="下载MV" onclick="location.href=temp_url+'source/down.php?type=video&id={video['id']}';"></a>
+				</div>
+			</div>
+			<div class="song_detail">
+				
+				<video class="video" poster="{$mv.m_pic}" width="618" height="347" controls="controls" preload="auto">
+					<source src="{$mv.m_path}" />
+				</video>
+				
+			</div>
+			<div class="lyrics">
+				<div class="title">
+					<h3>MV简介</h3>
+				</div>
+				<div class="content">{$mv.m_jianjie}</div>
+			</div>
+		</div>
+		<div class="side_container">
+			<div class="album_source">
+				<div class="album_cover">
+					<img src="{$mv.m_pic}">
+				</div>
+				<h4>猜你喜欢</h4>
+				<ol class="recommend_list">
+                                    {volist name='top' id='top'}
+					<li>
+					<h5><a href="{:url('video',['id'=>$top['id']])}" title="{video['name']}">{$top.m_name}</a></h5>
+					<span class="count" style="display:inline-block">{$top.hit}</span>
+					</li>
+                                    {/volist}
+                                </ol>
+			</div>
+		</div>
+	</div>
+</div>
+<!--{require 'bottom.html'}-->
+<!--{require 'tips.html'}-->
+<!--{require 'visitor.html'}-->
+</body>
+</html>

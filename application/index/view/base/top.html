@@ -1,0 +1,85 @@
+<div class="header_top">
+	<div class="navlist">
+		<ul id="getlogin">
+			{if condition="$Think.session.name eq null"}
+                        <li class="mod_user"><p class="top_info unlogined">您还未登录，
+                                <a href="{:url('User/login')}">马上登录</a></p></li>';
+                        <li class="nav_musicbag"><span class="line">&nbsp;</span>
+                            <span class="musicbag_text"><a href="{:url('User/register')}">
+                                    <span>注册帐号</span></a>
+
+                            </span>
+                        </li>
+                        {elseif condition="$Think.session.vip eq 0"/}
+                        <li class="nav_musicvip"><span class="musicvip_text">
+                               
+                                <img src="__HOME_PATH__/css/svip.png"><a><span>开通绿钻</span></a></span>
+                                <a href="'.rewrite_mode('user.php/profile/vip/').'" target="_blank" class="btn_open_vip">开通</a></li>';
+                        <li class="nav_musicbag">
+                            <span class="line">&nbsp;</span>
+                            <span class="musicbag_text"><a>
+                            <img src="__HOME_PATH__/css/sui.png">
+                            <span>充值金币</span></a></span>
+                    <a href="" target="_blank" class="btn_open_musicbag">充值</a></li>';
+		<li class="nav_software">
+                    <span class="line">&nbsp;</span>
+                    <a href="{:url('User/userinfo')}" target="_blank"><span>个人中心</span></a></li>';
+		<li class="mod_user">
+                    <p class="top_info logined">
+                        <span onclick="">{$Think.session.name}</span>
+                        <a class="exit" href="{:url('User/logout')}">退出</a></p></li>
+                        {else /} 
+                            <li class="nav_musicvip">
+                                <span class="musicvip_text"><img src="__HOME_PATH__/css/svipe.png">
+                                    <a href="" target="_blank">
+                                        <span>绿钻</span></a></span></li>';
+                        <li class="nav_musicbag"><span class="line">&nbsp;</span>
+                            <span class="musicbag_text"><a><img src="__HOME_PATH__/css/sui.png">
+                                    <span>充值金币</span></a></span>
+                            <a href="" target="_blank" class="btn_open_musicbag">充值</a></li>';
+                        <li class="nav_software">
+                            <span class="line">&nbsp;</span>
+                            <a href="{:url('User/userinfo')}" target="_blank">
+                                <span>个人设置</span></a></li>';
+                        <li class="mod_user">
+                            <p class="top_info logined">
+                                <span onclick="">{$Think.session.name}</span>
+                                <a class="exit" href="{:url('User/logout')}">退出</a></p></li>
+                        {/if}
+                </ul>
+	</div>
+</div>
+
+<div class="main_top">
+		<h1 class="frame_logo"><a href="" class="logo">name</a></h1>
+		<div class="frame_search">
+                    <form action="{:url('search')}" method='post'>
+                        <input type="text" value="找到好音乐" name='con' class="search_text" id="keyword">
+			<input type="submit" value="搜索"  class="go_search">
+                    </form>
+			
+			<div class="search_result" style="display:none" id="getsearch"></div>
+		</div>
+		<div class="navigation">
+			<ul>
+				<li class="nav_home"><a href="{:url('Index/index')}"><span>音乐馆</span></a></li>
+				<li class="nav_mv"><a href="{:url('Index/mv')}"><span>MV</span></a></li>
+				<li class="nav_mymusic"><a href="{:url('User/usersong')}"><span>音乐</span></a></li>
+				<li class="nav_musicvip">
+                                    <a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=XSdzLjUoLDQzOh0sLHM_MjA" style="text-decoration:none;"><span>联系我们</span></a></li>
+			</ul>
+		</div>
+		<div class="sub_navigation">
+			<p class="sub_lib" style="display: block;">
+				<a href="{:url('Index/index')}" class="nonce">首页</a>|
+				<a href="{:url('Index/rank')}">发现音乐</a>|
+				<a href="{:url('Index/special_class')}">精选辑</a>|
+				<a href="{:url('Index/singer_class')}">歌手</a>
+			</p>
+			<p class="sub_mv" style="display: none;">
+				<a href="{:url('Index/mv')}">MV推荐</a>|
+				<a href="{:url('Index/vidclass')}">MV库</a>
+			</p>
+			
+		</div>
+	</div>

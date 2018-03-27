@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<title> - 歌手 - </title>
+<meta name="Keywords" content="{_G['keywords']}" />
+<meta name="Description" content="{_G['description']}" />
+<link href="__HOME_PATH__/css/index.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/singer.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/tips.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/visitor.css" type="text/css" rel="stylesheet" />
+<style type="text/css">
+.mod_side_nav .current_{singer['classid']}{color:#0c8f44;font-weight:bold;border-left:5px solid #F60}
+</style>
+<script type="text/javascript" src="__HOME_PATH__/js/jquery.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/menu.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/visitor.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/lib.js"></script>
+<script type="text/javascript">
+var in_path = '{_G['path']}';
+var temp_url = '__HOME_PATH__/';
+var search_url = '{rewrite['index.php/search/music/target/']}';
+var _menu = 'music';
+</script>
+</head>
+<body>
+<div class="frame_top">
+	{include file='base/top' /}
+</div>
+<div class="main_frame">
+	<div class="layout_1">
+		<div class="side_container">
+			<div class="mod_side_nav">
+				<ul>
+					{volist name='class' id='val'}
+					<li><a href="{:url('sinclass',['id'=>$val['sid']])}" class="js_nav current_{$val.sid}">{$val.name}</a></li>
+                                        {/volist}
+				</ul>
+			</div>
+		</div>
+		<div class="main_container">
+			<h2 class="singer_main_tt">歌手列表</h2>
+			<div class="singer_main">
+				
+				<div class="singer_pic_list">
+					<ol><!--{loop singer page=30 class=this}-->
+                                            {volist name='singer' id='v'}
+						<li>
+							<a href="{singer['link']}" target="_blank" title="{$v.sname}" class="singer_pic"><img src="{$v.spic}"></a>
+							<h5 class="singer_name"><span class="txt"><a href="{:url('singer',['id'=>$v['sid']])}" title="{$v.sname}">{$v.sname}</a></span></h5>
+						</li>
+                                            {/volist}
+					<!--{/loop singer}--></ol>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<!--{require 'bottom.html'}-->
+<!--{require 'tips.html'}-->
+<!--{require 'visitor.html'}-->
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<title>{$ab.aname} - {$ab.name}</title>
+<meta name="Keywords" content="{_G['keywords']}" />
+<meta name="Description" content="{_G['description']}" />
+<link href="__HOME_PATH__/css/index.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/album_details.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/tips.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/visitor.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__HOME_PATH__/js/jquery.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/menu.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/visitor.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/lib.js"></script>
+<script type="text/javascript">
+var in_path = '{_G['path']}';
+var temp_url = '__HOME_PATH__/';
+var search_url = '{rewrite['index.php/search/music/target/']}';
+var _menu = 'music';
+(function() {
+        (".btn_open").live("click", function() {
+                (".btn_open").hide();
+                (".btn_close").show();
+                (".album_detail").removeClass("close_detail");
+                (".album_detail").addClass("open_detail");
+        });
+        (".btn_close").live("click", function() {
+                (".btn_close").hide();
+                (".btn_open").show();
+                (".album_detail").removeClass("open_detail");
+                (".album_detail").addClass("close_detail");
+        });
+});
+</script>
+</head>
+<body>
+<div class="frame_top">
+	{include file='base/top' /}
+</div>
+<div class="main_frame">
+	<div class="layout_2">
+		<div class="main_container">
+			<div class="mod_album_info">
+				<img class="album_cover" src="{$ab.spic}">
+				<div class="album_text">
+					<h2>{$ab.aname}</h2>
+					<a href="javascript:player_index('mlist', 'ing');" class="album_play" title="播放专辑">播放专辑</a>
+					<p>
+						制作人：<a href="{special['ulink']}" target="_blank">{$ab.username}</a>
+					</p>
+					<p>
+						浏览人气：{$ab.dianji}
+					</p>
+					<p>
+						所属分类：<a href="{special['classlink']}" target="_blank">{$ab.name}</a>
+					</p>
+					<p>
+						所属歌手：<a href="{special['singerlink']}" target="_blank">{$ab.sname}</a>
+					</p>
+					
+					<p>
+						发行公司：{$ab.company}
+					</p>
+					<p>
+						更新时间：{$ab.create_time|date="Y-m-d H:i:s",###}
+					</p>
+				</div>
+				<div class="album_detail close_detail">
+					<p>{$ab.jianjie}</p>
+					<p class="album_info_op">
+						<a class="btn_open" href="javascript:void(0)">详细<span class="icon_open"></span></a>
+						<a class="btn_close" style="display:none;" href="javascript:void(0)">收起<span class="icon_close"></span></a>
+					</p>
+				</div>
+			</div>
+			<div class="music_list_frame">
+				<div class="album_mlist_tt">
+					<h3>曲目列表</h3>
+					<a href="javascript:player_index('mlist', 'ing');" class="btn_play" title="播放">播放</a><a href="javascript:player_index('mlist', 'add');" class="btn_add" title="添加">添加</a>
+				</div>
+				<div class="music_list class_songlist">
+					<p>
+						<input type="checkbox" checked="checked" id="checkbox" onclick="lib.quanxuan('mlist');">
+						<label for="checkbox">全选</label>
+					</p>
+					<ol id="mlist">
+                                            {volist name='m' id='m'}
+						<li onmouseover="this.className='play_hover'" onmouseout="this.className=''">
+						<input type="checkbox" value="{$m.id}" checked="checked">
+						<div class="music_name">
+							<span class="txt"><a href="{:url('music',['id'=>$m['id']])}" target="_blank" title="{music['name']}">{$m.name}</a></span>
+						</div>
+						<div class="album_name">
+							<a href="{:url('singer',['id'=>$m['sid']])}" target="_blank" title="{music['singername']}">{$ab.sname}</a>
+						</div>
+						<div class="count">
+							{if condition="$m.hit lt 10"}
+                                                        <strong style="width:{$m.hit}0%;">
+                                                            {else/}
+                                                            <strong style="width:100%;">
+                                                               {/if}
+                                                            </strong>
+						</div>
+						<div class="list_cp">
+							<a href="javascript:player_index({music['id']}, 'ing');" title="播放" class="btn_play">播放</a>
+                                                        <a href="javascript:player_index({music['id']}, 'add');" title="添加" class="btn_add">添加</a>
+                                                        <a href="javascript:create_fav({music['id']});" title="收藏" class="btn_like">收藏</a>
+						</div>
+						<span class="play_time">{$m.create_time|date="Y-m-d H:i:s",###}</span>
+						</li>
+                                            {/volist}
+                                        </ol>
+				</div>
+			</div>
+		</div>
+		<div class="side_container">
+			<div class="mod_other_album">
+				<div class="title">
+					<h3>TA的其它专辑</h3>
+				</div>
+				<div class="mod_more">
+					<a href="{special['classlink']}" target="_blank" class="mod_more_link">更多</a>
+				</div>
+				<div class="mod_content">
+					<ul>{volist name='res' id ='res'}
+						<li>
+						<a class="album_pic" href="{:url('special',['id'=>$res['id']])}" title="{special['name']}">
+                                                    <img src="{$res.pic}" width="100" height="100"></a>
+						<h5><a class="album_name" href="{:url('special',['id'=>$res['id']])}" title="{$res.aname}">{$res.aname}</a></h5>
+						<p>{$res.create_time|date="Y-m-d H:i:s",###}</p>
+						</li>
+					{/volist}
+                                        </ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{include file='base/bottom' /}
+{include file='base/tips' /}
+{include file='base/visitor' /}
+</body>
+</html>

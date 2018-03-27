@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<title>{singer['search']} - 搜索歌手 - {_G['name']}</title>
+<meta name="Keywords" content="{_G['keywords']}" />
+<meta name="Description" content="{_G['description']}" />
+<link href="__HOME_PATH__/css/index.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/search_collect.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/tips.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/visitor.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__HOME_PATH__/js/jquery.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/menu.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/visitor.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/lib.js"></script>
+<script type="text/javascript">
+var in_path = '{_G['path']}';
+var temp_url = '__HOME_PATH__/';
+var search_url = '{rewrite['index.php/search/singer/target/']}';
+var _menu = 'music';
+</script>
+</head>
+<body>
+<div class="frame_top">
+	{include file='base/top' /}
+</div>
+<div class="main_frame">
+	<div class="mod_soso">
+		<div class="soso_box">
+			
+		</div>
+	</div>
+	<div class="layout_1">
+		<div class="side_container">
+			<div class="mod_side_nav">
+				<p>
+					<a style="cursor:pointer;" href="{:url('search',['con'=>$con])}" >单曲</a>
+				</p>
+				<p>
+					<a class="current">歌手</a>
+				</p>
+				<p>
+					<a style="cursor:pointer;" href="{:url('special_search',['con'=>$con])}">专辑</a>
+				</p>
+				<p>
+					<a style="cursor:pointer;" href="{:url('video_search',['con'=>$con])}">MV</a>
+				</p>
+			</div>
+		</div>
+		<div class="main_container">
+			<div class="search_album_frame">
+				<div class="search_title no_operation">
+					<h2>歌手</h2>
+				</div>
+				<div class="search_album_list">
+					<ul>{volist name='data' id='val'}
+						<li>
+						<a href="{singer['link']}" target="_blank" title="{singer['name']}" class="mod_poster_130"><img src="{$val.spic}"></a>
+						<h5><a href="{singer['link']}" target="_blank" title="{singer['name']}">{$val.sname}</a></h5>
+						</li>
+					{/volist}
+                                        </ul>
+				</div>
+			</div>
+			
+			<div class="search_time">
+				<p>找到相关结果共 {$c} 条</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!--{require 'bottom.html'}-->
+<!--{require 'tips.html'}-->
+<!--{require 'visitor.html'}-->
+</body>
+</html>

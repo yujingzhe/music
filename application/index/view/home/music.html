@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<title>{$minfo.name} - {$minfo.aname} - {$minfo.sname}</title>
+<meta name="Keywords" content="{_G['keywords']}" />
+<meta name="Description" content="{_G['description']}" />
+<link href="__HOME_PATH__/css/index.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/song_details.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/comment.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/tips.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/visitor.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__HOME_PATH__/js/jquery.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/menu.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/visitor.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/lib.js"></script>
+<script type="text/javascript">
+var in_path = '{_G['path']}';
+var temp_url = '__HOME_PATH__/';
+var search_url = '{rewrite['index.php/search/music/target/']}';
+var _menu = 'music';
+
+function copy_lyric() {
+        var browserName = navigator.appName;
+        if (browserName == "Netscape") {
+                lib.t_ips("您的浏览器不支持自动复制，请手工复制！", 0, 3e3);
+        } else if (browserName == "Microsoft Internet Explorer") {
+                clipboardData.setData("Text", ("#lyric").text());
+                lib.t_ips("恭喜，歌词复制成功！", 1, 1e3);
+        }
+}
+function getbitrate() {
+	<!--{eval}-->
+	audio = getfield('music', 'in_audio', 'in_id', {music['id']});
+	if(preg_match('/mp3/', audio) && is_file(IN_ROOT.audio)){
+		include_once IN_ROOT.'./source/pack/mp3/class.mp3.php';
+		kbps = @MP3::Bitrate(IN_ROOT.audio);
+		return 'return "'.kbps.' Kbps";';
+	}else{
+		return 'return "'.substr(strrchr(audio, '.'), 1).'";';
+	}
+	<!--{/eval}-->
+}
+function get_tag(str) {
+        var keyword = str + ">";
+        keyword = keyword.replace(/,>/g, "");
+        keyword = keyword.replace(/>/g, "");
+        keyword = keyword.replace(/\//g, "");
+        keyword = keyword.replace(/\\/g, "");
+        keyword = keyword.replace(/\?/g, "");
+        if (keyword) {
+                var tag = '<span class="origin_complaints">歌曲标签：';
+                var strs = keyword.split(",");
+                for (i = 0; i < strs.length; i++) {
+                        tag += '<a href="' + search_url.replace(/target/g, strs[i]) + '" target="_blank">' + strs[i] + "</a>";
+                }
+                tag = tag + "</span>";
+        } else {
+                tag = "歌曲标签：暂无标签";
+        }
+        return tag;
+}
+</script>
+</head>
+<body>
+<div class="frame_top">
+	{include file='base/top' /}
+</div>
+<div class="main_frame">
+	<div class="layout_2">
+		<div class="main_container">
+			<div class="song_title" style="height:auto;">
+				<h2><span>{$minfo.name}</span></h2>
+				<div class="opertate">
+					<a href="javascript:player_index($minfo.id}, 'ing');" title="播放" class="btn_play">播放</a>
+                                        <a href="javascript:player_index({$minfo.id}, 'add');" title="添加" class="btn_add">添加</a>
+                                        <a class="btn_down" title="下载" href="javascript:create_down({$minfo.id});"></a>
+				</div>
+			</div>
+			<div class="song_detail">
+				<ul class="song_info">
+					<li><span class="origin_complaints">所属分类：
+                                                <a href="{music['classlink']}" target="_blank">{$minfo.c_name}</a></span></li>
+					<li><span class="singer_name">所属歌手：
+                                                <a href="{:url('singer',['id'=>$minfo['sid']])}" target="_blank">{$minfo.sname}</a></span></li>
+					<li><span class="album_name">所属专辑：
+                                                <a href="{:url('special',['id'=>$minfo['zid']])}" target="_blank">{$minfo.aname}</a></span></li>
+					
+					<li>下载权限：
+                                       
+                                            游客下载</li>
+					
+					<li>点击次数：{$minfo.hit}</li>
+					
+					
+					<li>推荐指数：{$minfo.top}</li>
+					<li><span class="origin_complaints">上传用户：<a href="{music['ulink']}" target="_blank">{$minfo.username}</a></span></li>
+					<li>更新时间：{$minfo.update_time|date = 'Y-m-d H:i:s',###}</li>
+					
+				</ul>
+				
+				<div class="op_content">
+                                    {if condition="$like eq 0"}
+					<a href="{:url('like',['id'=>$minfo['id']])}" class="btn_like"><i class="icon_like"></i><span>收藏</span></a>
+                                        {else/}
+                                        <a href="{:url('nolike',['id'=>$minfo['id']])}" class="btn_like"><i class="icon_like"></i><span>已收</span></a>
+                                        {/if}
+                                        
+					<a href="{:url('good',['id'=>$minfo['id']])}" class="btn_good"><i class="icon_good"></i><span>顶</span></a>
+					<a href="{:url('bad',['id'=>$minfo['id']])}" class="btn_bad"><i class="icon_bad"></i><span>踩</span></a>
+                                        <a href='#SOHUCS' class="btn_share">
+                                            <i class="icon_share"></i>
+                                            <span id="btntab">评论</span></a>
+				</div>
+			</div>
+			<div class="lyrics" id="comment_tab" style="display:none">
+                            <script type="text/javascript">get_comment({music['id']}, 1);</script>
+                        </div>
+                    
+			<div class="lyrics" id="lyric_tab">
+				<div class="title">
+					<h3>歌词</h3>
+					<p>
+                                            <a href="javascript:copy_lyric();" onclick="copy_lyric()">复制歌词</a>
+					</p>
+				</div>
+				<div class="content" id="lyric">{$minfo.m_text}</div>
+			</div>
+                    <div id="SOHUCS" sid="{$minfo['id']}"></div>
+                    <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+                    <script type="text/javascript">
+                    window.changyan.api.config({
+                    appid: 'cytwMfwao',
+                    conf: 'prod_c82fb5bca5ca24bf74686107e8f53aa8'
+                    });
+                    </script>
+		</div>
+		<div class="side_container">
+			<div class="album_source">
+				<div class="album_cover">
+					<img src="{$minfo.pic}">
+				</div>
+				<h4>猜你喜欢</h4>
+				<ol class="recommend_list">
+                                    {volist name="mut" id="val"}
+					<li onmouseover="this.className='play_hover';('#count_{$val.id}').hide()" onmouseout="this.className='';('#count_{$val.id}').show()">
+					<h5><a href="{:url('music',['id'=>$val['id']])}" title="{$val.name}">{$val.name}</a></h5>
+					
+					<div class="list_cp">
+						<a href="javascript:player_index({$val.id}, 'ing');" title="播放" class="btn_play">播放</a>
+                                                <a href="javascript:player_index({$val.id}, 'add');" title="添加" class="btn_add">添加</a>
+                                                <a href="{:url('like',['id'=>$val['id']])}" title="收藏" class="btn_like">收藏</a>
+					</div>
+					</li>
+                                        {/volist}
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+{include file='base/bottom' /}
+{include file='base/tips' /}
+{include file='base/visitor' /}
+</body>
+</html>

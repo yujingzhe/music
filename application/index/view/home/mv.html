@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<title>MV推荐 </title>
+<meta name="Keywords" content="{_G['keywords']}" />
+<meta name="Description" content="{_G['description']}" />
+<link href="__HOME_PATH__/css/index.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/mv_index.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/tips.css" type="text/css" rel="stylesheet" />
+<link href="__HOME_PATH__/css/visitor.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__HOME_PATH__/js/jquery.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/menu.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/visitor.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/index.js"></script>
+<script type="text/javascript" src="__HOME_PATH__/js/lib.js"></script>
+<script type="text/javascript">
+var in_path = '{_G['path']}';
+var temp_url = '__HOME_PATH__/';
+var search_url = '{rewrite['index.php/search/music/target/']}';
+var _menu = 'video';
+</script>
+</head>
+<body>
+<div class="frame_top">
+	{include file='base/top' /}
+	
+</div>
+<div class="main_frame">
+	<div class="layout_2">
+		<div class="main_container">
+			<div class="mod_focus_show" id="slide">
+				<a href="javascript:void(0)" id="btnLeft" class="slide_prev">上一个</a><a href="javascript:void(0)" id="btnRight" class="slide_next">下一个</a>
+				<ul class="mod_focus_pic">
+					{volist name='lie' id='v'}
+					<li><img src="{$v.m_pic}" title="{video['name']}" onclick="window.open('{:url('video',['id'=>$v['id']])}');"></li>
+					{/volist}
+					
+				</ul>
+				<div class="focus_switch" id="ico">
+					<a class="current" style="cursor:pointer">
+<!--                                            <a style="cursor:pointer">-->
+                                                
+                                            </a>
+				</div>
+			</div>
+			<div class="mod_mv">
+				<div class="title">
+					<h2>MV首播</h2>
+				</div>
+				<div class="mod_content">
+					<div class="slide_content">
+						<ul class="mod_mv_list">
+							{volist name='lie' id='v'}
+							<li>
+							<a href="{:url('video',['id'=>$v['id']])}" target="_blank" class="mod_poster_160" title="{$v.m_name}">
+							<img src="{$v.m_pic}">
+							<span class="icon_play" onmouseover="this.className='icon_play icon_play_hover'" onmouseout="this.className='icon_play'"></span>
+							
+<!--                                                         <span class="icon_today"></span>-->
+                                                       
+							</a>
+							<p>
+								<a href="{:url('video',['id'=>$v['id']])}" target="_blank" class="mv_name" title="{$v.m_name}">{$v.m_name}</a>
+							</p>
+							<p>
+								<a href="{:url('singer',['id'=>$v['sid']])}" target="_blank" class="singer_name" title="{$v.sname}">{$v.sname}</a>
+							</p>
+							<p>
+							{$v.update_time|date='Y-m-d ',###}
+							</p>
+							</li>
+							{/volist}
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="mod_hot_mv">
+				<div class="title">
+					<h2>MV热播</h2>
+				</div>
+				<div class="mod_content">
+					<div class="slide_content">
+						<ul class="mod_mv_list">
+							{volist name='top' id='val'}
+							<li>
+							<a href="{:url('video',['id'=>$val['id']])}" target="_blank" class="mod_poster_160" title="{$val.m_name}">
+							<img src="{$val.m_pic}">
+							<span class="icon_play" onmouseover="this.className='icon_play icon_play_hover'" onmouseout="this.className='icon_play'"></span>
+							</a>
+							<p>
+								<a href="{:url('video',['id'=>$val['id']])}" target="_blank" class="mv_name" title="{video['name']}">{$val.m_name}</a>
+							</p>
+							<p>
+								<a href="{:url('singer',['id'=>$val['sid']])}" target="_blank" class="singer_name" title="{video['singername']}">{$val.sname}</a>
+							</p>
+							<p>
+							
+							<span class="date">{$val.update_time|date='Y-m-d ',###}</span>
+							</p>
+							</li>
+							{/volist}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="side_container">
+            		<div class="mod_mv_index">
+            			<div class="title">
+                			<h2>MV索引</h2>
+                		</div>
+                		<div class="mod_content">
+					<ul>
+                                            {volist name='cate' id='res'}
+						<li><a href="{:url('video_class',['id'=>$res['id']])}" target="_blank" title="{$res.mv_name}">{$res.mv_name}</a></li>
+					{/volist}
+                                        </ul>
+                		</div>
+            		</div>
+			<div class="mod_24hours">
+				<div class="title">
+					<h2>24小时热播榜</h2>
+				</div>
+				<div class="mod_content">
+					<ol>
+						{volist name='re' id='res'}
+						<li class="rank_top">
+						<a class="mod_poster" href="{:url('video',['id'=>$res['id']])}" target="_blank" title="{$res.m_name}"><img src="{$res.m_pic}"><em>1</em></a>
+						<p class="mv_info">
+							<a href="{:url('video',['id'=>$res['id']])}" target="_blank" title="{video['name']}">{$res.m_name}</a>-
+							<a href="{:url('singer',['id'=>$res['sid']])}" target="_blank" title="{video['singername']}">{$res.sname}</a>
+						</p>
+						<span class="count">{$res.hit}</span>
+						</li>
+						<!--{/loop video}-->
+						<!--{loop video count=9 start=15 sort=hits}-->
+						
+						{/volist}
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--{require 'bottom.html'}-->
+<!--{require 'tips.html'}-->
+<!--{require 'visitor.html'}-->
+</body>
+</html>
