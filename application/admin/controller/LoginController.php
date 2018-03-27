@@ -13,14 +13,14 @@ class LoginController extends Controller {
      * 登出
      */
     public function logout() {
+        
         session('a_name', null);
         session('a_id', null);
         cookie('a_name', null);
         cookie('a_id', null);
-        // $this->success('退出成功', 'login/index');
-            // echo "<script>alert('退出成功')</script>"; 
-           echo "<script>window.location.href='index';</script>";
-           exit();
+
+        echo "<script>window.location.href='index';</script>";
+        exit();
     }
 
 

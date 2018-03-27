@@ -42,4 +42,15 @@ class Pic extends \think\Model
     }
 
 
+
+	/**
+	 * /// 添加PIC集
+	 */
+	public function addpic($data) 
+	{
+		
+		$info = Db::table('bx_pic')->insert($data);
+		return $info;
+	}
+
 }
