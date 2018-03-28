@@ -1,21 +1,25 @@
 <?php
-
-namespace app\index\controller;
-use app\index\model\User as UserModel;
+namespace application\index\controller;
+use application\index\model\User as UserModel;
 use think\Controller;
 use think\Validate;
 use think\Session;
 use think\Request;
 use sina\SaeTOAuthV2;
 use sina\SaeTClientV2;
-
+use server\fileupload;
+use think\config;
+//引入七牛云的相关文件
+use Qiniu\Auth as Auth;
+use Qiniu\Storage\BucketManager;
+use Qiniu\Storage\UploadManager;
 class User extends Controller
 {
 	protected $user;
 	public function _initialize()
 	{
 		 $link = model('link')->clink();
-                $this->assign('link',$link);
+        $this->assign('link',$link);
 	}
 	
 	public function fenye()
@@ -79,6 +83,11 @@ class User extends Controller
 				$status = 4;    
 			};
 		}
+            $ip = $this->request->ip();
+            $ip = ip2long($ip);
+            $id = session('id');
+            // return $pwd;
+            $a = db('user')->where('id',$id)->update(['loginip' => $ip]);
             return $status;
             
         }
@@ -127,6 +136,7 @@ class User extends Controller
         
          public function login_frame()
         {
+
             $o = new SaeTOAuthV2( WB_AKEY , WB_SKEY );
             $code_url = $o->getAUthorizeURL(WB_CALLBACK_URL) ;
             $this->assign('code_url',$code_url);
@@ -171,11 +181,52 @@ class User extends Controller
         
          public function repassword()
         {
-              $res = model('userinfo')->info();
+            $res = model('userinfo')->info();
             //dump($res);
             $this->assign('info',$res);
             return $this->fetch();
         }
-        
-	
+
+
+        public function dopic()
+        {  
+            // var_dump(session('id'));die;
+        $imgfile = request()->file('pic');
+        // var_dump($imgfile);die;
+        $filePath = $imgfile->getRealPath();  
+        $ext = pathinfo($imgfile->getInfo('name'), PATHINFO_EXTENSION);  //后缀  
+        // 上传到七牛后保存的文件名  
+        $key =substr(md5($imgfile->getRealPath()) , 0, 5). date('YmdHis') . rand(0, 9999) . '.' . $ext;  
+        require_once APP_PATH . '/../vendor/Qiniu/autoload.php';  
+        $accessKey = Config::get('qiniu.accessKey');  
+        $secretKey = Config::get('qiniu.secretKey');  
+        $auth = new Auth($accessKey, $secretKey); 
+
+        // 要上传的空间  
+        $bucket = Config::get('qiniu.bucket');  
+        $domain = Config::get('qiniu.DOMAIN');  
+        $token = $auth->uploadToken($bucket);  
+        // 初始化 UploadManager 对象并进行文件的上传  
+        $uploadMgr = new UploadManager();  
+
+        // 调用 UploadManager 的 putFile 方法进行文件的上传  
+        $a = list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);  
+
+        if ($err !== null) {  
+          echo "<script>alert('上传失败')</script>"; 
+            echo "<script>window.history.go(-1)</script>";
+            exit();
+        } else {  
+        $data['pic'] = 'http://'.$domain.'/'.$ret['key'];
+           
+        $res = model('user')->tx($data);
+            // var_dump($res);die;
+        if($res){
+            $this->success('修改成功');
+        }else{
+                $this->error('修改失败');
+            }
+        }  
+    }
+
 }

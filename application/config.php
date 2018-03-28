@@ -85,7 +85,7 @@ return [
     // URL参数方式 0 按名称成对解析 1 按顺序解析
     'url_param_type' => 0,
     // 是否开启路由
-    'url_route_on' => FALSE,
+    'url_route_on' => true,
     // 是否强制使用路由
     'url_route_must' => false,
     // 域名部署
@@ -151,7 +151,7 @@ return [
     'show_error_msg' => false,
     // 异常处理handle类 留空使用 \think\exception\Handle
     'exception_handle' => '',//哈哈哈哈哈404
-     'http_exception_template'    =>
+    'http_exception_template'    =>
         [
             404 => APP_PATH . 'admin/view/error/404.html',
             // 501 => APP_PATH . 'admin/view/error/501.html',
@@ -233,20 +233,19 @@ return [
         'secretkey' => '-oBf4uoezx-CtZJu2LfZuCwwWXefGkBdF0cGyrdf',
         'bucket' => 'bxmusic',
      ],*/
-    // 验证码
-    'captcha' => [
+      'captcha' => [
         // 验证码字符集合
         'codeSet' => '2345678abcdefhijkmnpqrstuvwxyzABCDEFGHJKLMNPQRTUVWXY',
         // 验证码字体大小(px)
-        'fontSize' => 14,
+        'fontSize' => 15,
         // 是否画混淆曲线
-        'useCurve' => true,
+        'useCurve' => false,
         // 验证码图片高度
-        'imageH' => 35,
+        'imageH' => 30,
         // 验证码图片宽度
         'imageW' => 100,
         // 验证码位数
-        'length' =>4,
+        'length' => 4,
         // 验证成功后是否重置
         'reset' => true
     ],

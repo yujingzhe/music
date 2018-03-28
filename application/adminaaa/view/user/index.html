@@ -1,0 +1,97 @@
+<form method="post" action="{:url('del')}">
+<div class="row">
+    <div class="col-lg-12">
+    	<div class="panel panel-default">
+          <div class="panel-heading ">用户列表 
+
+            <!-- <button class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = 'manydel'">
+            批量删除
+            <i class="icon-reply icon-only"></i>
+                    </button> -->
+    <!--     <a class="btn btn-sm btn-primary pull-right">
+        添加
+        <i class="icon-reply icon-only"></i>
+    </a> -->
+      </div>
+    		<div class="table-responsive">
+        		<table class="table table-striped table-bordered table-hover">      
+                    <thead>
+                      <tr>
+                      <!--   <th style="width: 5%" class="check-all">
+                      	<div data-toggle="tooltip" data-title="全选" class="checkbox c-checkbox">
+                       		
+                                            		</div>
+                      </th> -->
+         				<!-- <th style="width:5px;">UID</th> -->
+         				<th style="width:10px;">ID</th>
+         				<th style="width:45px;">头像</th>
+        				<th style="width:90px;">昵称</th>
+        				<th style="width:70px;">名字</th>
+        				<th style="width:50px;">积分</th>
+						
+						<th style="width:80px;">QQ</th>
+						<th style="width:100px;">电话</th>
+						
+				
+        				<th style="width:140px;">邮箱</th>
+        				<th style="width:200px;">最后登录</th>
+        				<!-- <th style="width:150px;">最后登录IP</th> -->
+        				<th style="width:300px;">个签</th>
+        			<th style="width:90px;">操作</th>
+                      </tr>
+                    </thead>
+                    <tbody role="alert" aria-live="polite" aria-relevant="all">
+        				{notempty name="info"}
+        				{volist name="info" id="vo"}
+        				<tr>
+                   		 	<!-- <td>
+                   		 	                      			<div class="checkbox c-checkbox">
+                   		 	                         			<label>
+                   		 	                            		<input type="checkbox" class="ids" value="$vo.uid}>" name="id[]">
+                   		 	                            		<span class="fa fa-check"></span>
+                   		 	                         			</label>
+                   		 	                      			</div>
+                   		 	                   			</td> -->
+        					<td>{$vo['id']} </td>
+        					<td> <img src="{$vo.pic}" style="width:45px; border-radius: 45px; height:40px;" alt="{$vo['username']}" </td>
+        					<td>{$vo['username']} {if condition="$vo.vip eq '1'"} 
+        					<img src="/admin/images/svip.png" style="width:15px;height: 15px;" alt="VIP">
+							{/if}   </td>
+        					<td>{$vo['name']}</td>
+        					<td>{$vo['gold']}</td>
+        					
+        					<td> {$vo.qq} </td>
+        					<td> {$vo.tel} </td>
+							
+
+							<td>{$vo['email']} </td>
+        					<td><span>{$vo.logintime|time_format}</br>
+                            {$vo['region']}
+                  </span></td>
+        					<td>{$vo.gq}</td>
+							<th> 
+
+							{if condition="$vo.vip eq '1'"}<a id="quxiao"  href="{:url('vip',array('id'=>$vo['id']))}">取消VIP</a> </br>
+							{else /} <a id="shouyu" href="{:url('vip',array('id'=>$vo['id']))}">授予VIP</a> </br>
+							{/if}
+							
+							{if condition="$vo.status eq '1'"}<a href="{:url('lock',array('id'=>$vo['id']))}">点击解锁</a> </br>
+							{else /} <a href="{:url('lock',array('id'=>$vo['id']))}">锁定用户</a> </br>
+							{/if}
+
+
+							</th>
+        				</tr>
+        				{/volist}
+        				{else/}
+        				<td colspan="9" class="text-center">暂时还没有内容! </td>
+        				{/notempty}
+                    </tbody>
+                </table>
+     		</div>
+    		<!-- 结束 表格 -->
+    		{$page}  		
+    	</div>
+	</div>
+</div>
+

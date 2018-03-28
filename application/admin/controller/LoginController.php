@@ -75,6 +75,18 @@ class LoginController extends Controller {
         $pwd = md5($pwd);
         // 身份验证
         // return $name . $remember.$pwd;
+  // 验证码验证  //4验证码不正确 1 用户名不存在 2 密码错误 
+        $validate = new Validate([
+            'captcha|验证码'=>'require|captcha'
+        ]);
+        $data = [
+            'captcha' => input('post.code')
+        ];    
+        if(!$validate->check($data)){
+                $status = 4;   
+                return $status; 
+        };
+
         $status =model('Admin')->chaxun($name,$pwd);    
         // 返回值
        
@@ -89,6 +101,7 @@ class LoginController extends Controller {
                 cookie('a_id', encry_code($info['id']));
             }
             //记录登录信息
+            
             Loader::model('Admin')->editInfo(1, $info['id']);
             // $this->success('登入成功', 'index/index');
         }

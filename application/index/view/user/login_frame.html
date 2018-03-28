@@ -58,6 +58,7 @@
 											</div>
 										</div>
 										<div class="verifyimgArea">
+											<!-- <div><img src="{:captcha_src()}" alt="captcha" /></div> -->
 											<img id="img_seccode" src="{:captcha_src()}" alt='captcha' onclick='this.src=this.src' align="absmiddle" >
                                                                                         <a href="javascript:update_seccode();" class="verifyimg_tips">更换</a>
                                                                                         <a href="{:url('lostpasswd')}" target="_top" class="verifyimg_tips">忘了密码？</a>
@@ -90,6 +91,7 @@
         
         // ajax请求
        $.post('{:url("dologin")}', {name:name,pwd:pwd,code:code}, function(data){
+       	// alert(data);
            if (data == 1) {
                 alert("用户名不存在");
            } else if (data == 2) {

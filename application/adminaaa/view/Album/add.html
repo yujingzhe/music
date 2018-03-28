@@ -1,0 +1,142 @@
+ <div class="col-sm-6 pull-right">
+        <button class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = 'index'">
+            返回列表
+            <i class="icon-reply icon-only"></i>
+        </button>
+    </div>
+<div class="panel panel-default">
+	<div class="panel-heading">{:input('id')?'编辑':'新增'}专辑</div>
+ 	<div class="panel-body">
+    	<form class="form-horizontal" enctype="multipart/form-data" action="{:input('id')?'edit':'tianjia'}" name="Album"  method="post">									
+
+    	    <div class="form-group">		
+    			<label class="col-sm-2 control-label">专辑名称</label>
+    			<div class="col-sm-4">
+                    <input  type="text" name="aname" id="aname" class="form-control" value="{$data.aname|default=''}" >                 
+    				<input  type="hidden" name="id" id="" class="form-control" value="{$data.id|default=''}" >   				
+    			</div>
+    			<span class="help-inline">此项不能为空</span>
+    	    </div>		
+     
+    	    <div class="form-group">		
+    			<label class="col-sm-2 control-label">专辑类型</label>
+    			<div class="col-sm-2">
+    				
+    				<select name="zid"  id ="zid" class="form-control set-name">
+    				<option    value="{$data.zid|default='0'}">{$data.name|default='其他'}</option>
+    			{volist name="type" id="vo"}
+    				<option value="{$vo.zid}" >{$vo.name}</option>
+
+    			{/volist}
+    				</select>
+    			</div>	
+                </div>
+<!--            <div style="margin-left: 95px;" class="form-group">   
+                        <label class="col-sm-1 control-label">所属曲风</label>
+                        <div class="form-group">
+                            <div class="col-sm-9">
+                                {:select($selectCate,input('pid'),'name="pid" class="col-xs-10 col-sm-5"')}
+                            </div>
+                        </div> 
+                    </div>     -->		
+    
+    		<div class="form-group">	
+    			<label class="col-sm-2 control-label">所属艺术家</label>
+    			<div class="col-sm-3">
+    				<div class="input-group"  >
+                    <select name="sid"id="sid" class="form-control set-name"  size="5">
+                    <option  value="{$data.sid|default='0'}">{$data.sname|default='网络'}</option>
+                {volist name="singer" id="v"}
+                    <option value="{$v.sid}" >{$v.sname}</option>
+
+                {/volist}
+                    </select>
+                    </div>
+					<!-- <span class="hel<!-- p-block">可以填写，没有自动新增</span>  -->
+    			</div>	
+	
+    		</div>
+            <div class="form-group">    
+                <label class="col-sm-2 control-label">封面地址</label>
+                <div class="col-sm-4 mr-xs upimg-inner" style="position:relative;"> 
+            
+                    <input type="file"  name="pic" >            
+                    <div class="upload-progr">
+                        <div class="up-progress"><div class="upload-bar"></div></div>
+                    </div>
+                </div>
+                    
+    
+</div>		
+			
+
+    	    
+    		<div class="form-group">	
+				<label class="col-sm-2 control-label" >推荐位</label>
+                <div class="col-sm-3">  
+		      <input type="checkbox"   {if condition="$data['top'] eq '1'"}
+checked="checked"
+{/if}   value='1'name = "top"><span class="fa fa-check">为推荐</span></div>							
+    		</div>	
+    									
+    	    <div class="form-group">		
+    			<label class="col-sm-2 control-label">唱片公司</label>
+    			<div class="col-sm-3">	
+    			<input type="text" class="form-control" name="company"id="company" value="{$data.company|default=''}">
+    	    	</div>
+    	    </div>		
+    
+<!--             <div class="form-group">        
+                    <label class="col-sm-2 control-label">发行时间</label>
+                    <div class="col-sm-2">    
+                        <input type="date" name="pub_time" class="form-control" value="">                    
+        </div>
+        <span class="help-inline">格式：2008-08-08</span>
+    </div> -->	
+    	    
+    	    <div class="form-group">	
+    			<label class="col-sm-2 control-label">专辑简介</label>
+				<div class="col-sm-7">
+					<textarea  name="description" class="form-control">{$data.description|default=''}</textarea>
+				
+				</div>
+    	    </div>	  	    
+		
+    		<div class="form-group">
+    				
+            	<div class="col-sm-4 col-sm-offset-2">
+                	
+                	<button class="btn btn-primary no-refresh ajax-post" target-form="form-horizontal" id="baocun" type="submit">保存</button>
+                    <span style="color:red;" id= 'aaa'></span>
+            	</div>
+        	</div>
+        </form>
+	</div>
+</div>													
+ 
+
+
+<script src="/static/jquery-1.11.3.js"></script>
+
+<script type="text/javascript">
+$('#baocun').click(function() {
+   
+
+    if (!$('#aname').val()) {
+        $('#aaa').html('请输入专辑名');
+        return false;
+    }
+     if (!$('#sid').val()) {
+        $('#aaa').html('请选择歌手');
+        return false;
+    }
+   if (!$('#company').val()) {
+        $('#aaa').html('请填写唱片公司');
+        return false;
+    }
+
+})
+</script>
+
+
+

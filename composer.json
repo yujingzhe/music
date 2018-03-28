@@ -24,6 +24,13 @@
         "topthink/think-helper": "^1.0",
         "zoujingli/ip2region": "^1.0"
     },
+    "autoload":{
+      "psr-4":{
+          "sina\\":"vendor/sina",
+          "ajax\\":"vendor/ajax"
+      }  
+    },
+	
     "extra": {
         "think-path": "thinkphp"
     },

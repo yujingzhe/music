@@ -1,5 +1,5 @@
 <?php
-namespace app\index\controller;
+namespace application\index\controller;
 
 use think\Db;
 use think\Request;
@@ -12,10 +12,10 @@ use ajax\Page;
 class Index extends Controller
 {
 	use \traits\controller\Jump;
-	public function _empty()
+/*	public function _empty()
 	{
 		echo 123123123;
-	}
+	}*/
         public function _initialize()
     {
          $link = model('link')->clink();

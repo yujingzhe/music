@@ -10,9 +10,7 @@ class IndexController extends CommonController{
      */
   public function index()
   {
-
-
-    
+   
     //php获取前天起始时间戳和结束时间戳
       
     $beginQiantina=mktime(0,0,0,date('m'),date('d')-2,date('Y'));

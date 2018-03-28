@@ -1,6 +1,6 @@
 <?php
 
-namespace app\index\model;
+namespace application\index\model;
 use Think\Db;
 use think\Model;
 use think\Session;

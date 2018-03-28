@@ -70,9 +70,9 @@
               
               <div class="am-u-md-8">
                 <p>你可以使用<a href="#">系统</a>提供的默认头像或者使用本地上传头像。 </p>
-                <form class="am-form" action='dopic' method="post">
+                <form class="am-form" action='dopic'   enctype="multipart/form-data" method="post">
                   <div class="am-form-group">
-                    <input type="file" id="user-pic">
+                    <input type="file" id="user-pic" name="pic">
                     <p class="am-form-help">请选择要上传的文件...</p>
                     <input type="submit" class="am-btn am-btn-primary am-btn-xs" value="保存">
                   </div>

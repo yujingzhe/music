@@ -18,6 +18,14 @@ class ComposerStaticInit0e23e3eea876f474976de04dff6ebfcd
             'think\\composer\\' => 15,
             'think\\captcha\\' => 14,
         ),
+        's' => 
+        array (
+            'sina\\' => 5,
+        ),
+        'a' => 
+        array (
+            'ajax\\' => 5,
+        ),
         'P' => 
         array (
             'PHPMailer\\PHPMailer\\' => 20,
@@ -37,6 +45,14 @@ class ComposerStaticInit0e23e3eea876f474976de04dff6ebfcd
         array (
             0 => __DIR__ . '/..' . '/topthink/think-captcha/src',
         ),
+        'sina\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sina',
+        ),
+        'ajax\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ajax',
+        ),
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
@@ -44,7 +60,7 @@ class ComposerStaticInit0e23e3eea876f474976de04dff6ebfcd
     );
 
     public static $classMap = array (
-        'Ip2Region' => __DIR__ . '/..' . '/zoujingli/ip2region/Ip2Region.php',
+        'Ip2Region\\Ip2Region' => __DIR__ . '/..' . '/zoujingli/ip2region/Ip2Region.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

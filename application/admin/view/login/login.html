@@ -91,6 +91,13 @@
          <div id="pwd" style="color:red; display:none;">密码不正确</div>
       </div>
       <div style="margin:5px 0px;">
+        <input type="text" style="width:150px;" placeholder="请输入验证码..." name="code"/>
+        <img src="{:captcha_src()}" alt="captcha" style="vertical-align:bottom;" onclick="this.src=this.src" />
+
+       
+         <div id="code" style="color:red; display:none;">验证码错误</div>
+      </div>
+      <div style="margin:5px 0px;">
         <input type="checkbox"  style="margin-top:20px;"value="哈哈" id="islogin"/>记住密码</input>
          <span style="margin-left: 20px; color:red; ">注:公共场请不要记住密码</span>
       </div>
@@ -251,6 +258,7 @@
     $('#login').click(function () {
         var name = $('input[name=name]').val();
         var pwd = $('input[name=pwd]').val();
+        var code = $('input[name=code]').val();
       
       if($('#islogin').is(':checked')) {
         var islogin = 'OK';
@@ -258,16 +266,24 @@
         // console.log(name);
         // console.log(pwd);
         // console.log(islogin);
+        // console.log(code);
         // return false;
         // ajax请求
-       $.post('{:url("dologin")}', {name:name,pwd:pwd,islogin:islogin}, function(data){
+       $.post('{:url("dologin")}', {name:name,pwd:pwd,code:code,islogin:islogin}, function(data){
            console.log(data);
            if (data == 1) {
             $('#name').css('display','block'); 
+            $('#code').css('display','none'); 
+            $('#pwd').css('display','none'); 
            } else if (data == 2) {
             $('#pwd').css('display','block'); 
             $('#name').css('display','none'); 
-           } else if (data == 3) {
+            $('#code').css('display','none'); 
+           } else if (data == 4) {
+            $('#pwd').css('display','none'); 
+            $('#name').css('display','none'); 
+            $('#code').css('display','block'); 
+           }else if (data == 3) {
             window.location.href = '{:url("Index/index")}';
            }
    });

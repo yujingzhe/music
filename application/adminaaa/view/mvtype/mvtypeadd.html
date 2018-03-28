@@ -1,0 +1,51 @@
+ <div class="col-sm-6 pull-right">
+        <button class="btn btn-sm btn-primary pull-right" onclick="javascript:window.location.href = 'album_type'">
+            返回列表
+            <i class="icon-reply icon-only"></i>
+        </button>
+    </div>
+<div class="panel panel-default">
+	<div class="panel-heading">{:input('zid')?'编辑':'新增'}专辑类型</div>
+ 	<div class="panel-body">
+    	<form class="form-horizontal" enctype="multipart/form-data" action="{:input('zid')?'edittype':'addtype'}" name="songs"  method="post">														
+    		<div class="form-group">	
+    			<label class="col-sm-2 control-label">类型名称</label>
+    			<div class="col-sm-4">
+    				<input  type="text" name="name" id="zname" class="form-control" value="{$data.name|default=''}" >   
+    				<input  type="hidden" name="zid" id="" class="form-control" value="{$data.zid|default=''}" > 
+    			</div>
+    			<p class="help-block">此项不能为空</p>
+    	    </div>											
+    		
+    	    <div class="form-group">		
+    			<label class="col-sm-2 control-label">类型描述</label>
+    			<div class="col-sm-4">	
+    				<textarea name="description" class="form-control" style="width:300px;height:80px;" >{$data.description|default=''}</textarea>
+    	    	</div>
+    	    </div>			 
+    										
+    		<div class="form-group">
+    			<!-- <input type="hidden" name="status" value="">  -->
+    			<input type="hidden"  value=>     		
+            	<div class="col-sm-4 col-sm-offset-2">
+                	
+                	<button class="btn btn-primary ajax-post" target-form="form-horizontal"  id="baocun" type="submit">保存</button>
+                    <span id="aaa" style="color:red;" ></span>
+            	</div>
+        	</div>
+        </form>
+	</div>
+</div>
+<script src="/static/jquery-1.11.3.js"></script>
+<script type="text/javascript">
+// 判断是否输入信息
+$('#baocun').click(function() {
+    if (!$('#zname').val()) {
+        $('#aaa').html('请输入添加的专辑类型');
+        return false;
+    }
+})
+</script>
+	
+
+

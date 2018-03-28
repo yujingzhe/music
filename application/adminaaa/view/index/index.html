@@ -1,0 +1,291 @@
+
+   <link rel="stylesheet" href="/admin/js/animo/animate+animo.css">
+   <link rel="stylesheet" href="/admin/css/app.css">
+
+   <script type="text/javascript" src="/static/jquery-2.0.3.min.js"></script>
+ 
+   <script src="/static/bootstrap-3.1.1/js/bootstrap.js"></script>
+   <script src="/admin/js/animo/animo.min.js"></script>
+   <script src="/admin/js/app.js"></script>  
+<!-- 折线图 -->
+
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+       <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+<!-- 结束 -->
+
+<!-- 日历 -->
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_234130_nem7eskcrkpdgqfr.css">
+	<style>
+
+		ul{
+			list-style: none;
+		}
+		#schedule-box{
+			width: 320px;
+			margin: 0 auto;
+			padding: 35px 20px;
+			font-size: 13px;
+		}
+		.schedule-hd{
+			display: flex;
+			justify-content: space-between;
+			padding: 0 15px;
+		}
+		.today{
+			flex: 1;
+			text-align: center;
+		}
+		.ul-box{
+			overflow: hidden;
+		}
+		.ul-box > li{
+			float: left;
+			width: 14.28%;
+			text-align: center;
+			padding: 5px 0;
+		}
+		.other-month{
+			color: #999999;
+		}
+		.current-month{
+			color: #333333;
+		}
+		.today-style{
+			border-radius: 50%;
+			background: #58d321;
+		}
+		.arrow{
+			cursor: pointer;
+		}
+		.dayStyle{
+			display: inline-block;
+			width: 35px;
+			height: 35px;
+			border-radius: 50%;
+			text-align: center;
+			line-height: 35px;
+			cursor: pointer;
+		}
+		.current-month > .dayStyle:hover{
+			background: #00BDFF;
+			color: #ffffff;
+		}
+		.today-flag{
+			background: #00C2B1;
+			color: #fff;
+		}
+		.boxshaw{
+			box-shadow: 2px 2px 15px 2px #e3e3e3;
+		}
+		.selected-style {
+			background: #00BDFF;
+			color: #ffffff;
+		}
+		#h3Ele{
+			text-align: center;
+			padding: 10px;
+		}
+	</style>
+<!-- 日历 -->
+ <div class="row">
+	     <div class="col-lg-12">
+      <div class="panel panel-default">
+          <!-- <div class="panel-heading " style="font-size: 20px;">  认 真 面 对 工 作 , 开 心 面 对 生 活 
+                          
+                   </div> -->         <!-- 开始 首页主要内容-->
+
+	           <!-- 开始 首页主要内容-->
+	           <div class="col-md-9" style="margin-top:25px;">
+	              <div class="row">
+	                 <div class="col-lg-3 col-sm-6">
+	                    <div data-toggle="play-animation" data-play="fadeInDown" data-offset="0" data-delay="100" class="panel widget">
+	                    	<a class="row row-table row-flush" href="{:url('Music/index')}">
+		                		<div class="col-xs-4 bg-info text-center">
+		                           <em class="fa fa-music fa-2x"></em>
+		                        </div>
+		                        <div class="col-xs-8">
+		                           <div class="panel-body text-center">
+		                              <h4 class="mt0">{$count.music}</h4>
+		                              <p class="mb0 text-muted">歌曲数量</p>
+		                           </div>
+		                    	</div>
+	                    	</a>
+	                    </div>
+	                 </div>
+	                 <div class="col-lg-3 col-sm-6">
+	                    <div data-toggle="play-animation" data-play="fadeInDown" data-offset="0" data-delay="500" class="panel widget">
+		                    <a class="row row-table row-flush" href="{:url('Singer/index')}">
+		                       <div class="col-xs-4 bg-danger text-center">
+		                          <em class="fa fa-microphone fa-2x"></em>
+		                       </div>
+		                       <div class="col-xs-8">
+		                          <div class="panel-body text-center">
+		                             <h4 class="mt0">{$count.singer}</h4>
+		                             <p class="mb0 text-muted">艺术家数量</p>
+
+		                          </div>
+		                       </div>
+		                    </a>
+	                    </div>
+	                 </div>
+	                 <div class="col-lg-3 col-sm-6">
+	                    <!-- START widget-->
+	                 	<div data-toggle="play-animation" data-play="fadeInDown" data-offset="0" data-delay="1000" class="panel widget">
+		             		<a class="row row-table row-flush" href="{:url('Album/index')}">
+		                		<div class="col-xs-4 bg-inverse text-center">
+		                           <em class="fa fa-th-large fa-2x"></em>
+		                        </div>
+		                        <div class="col-xs-8">
+		                           <div class="panel-body text-center">
+		                              <h4 class="mt0">{$count.album}</h4>
+		                              <p class="mb0 text-muted">专辑数量</p>
+		                           </div>
+		                        </div>
+		                	</a>
+	                    </div>
+	                 </div>
+	                 <div class="col-lg-3 col-sm-6">
+	                    <div data-toggle="play-animation" data-play="fadeInDown" data-offset="0" data-delay="1500" class="panel widget">
+                     		<a class="row row-table row-flush" href="{:url('User/index')}">
+		                        <div class="col-xs-4 bg-green text-center">
+		                           <em class="fa fa-tags fa-2x"></em>
+		                        </div>
+		                        <div class="col-xs-8">
+		                           <div class="panel-body text-center">
+		                              <h4 class="mt0">{$count.user}</h4>
+		                              <p class="mb0 text-muted">用户数量</p>
+		                           </div>
+		                        </div>
+                     		</a>
+	                    </div>
+	                 </div>
+
+<!-- 折线图 -->
+<div style="float: left;">
+<div style="margin-left:60px;font-size:19px;">近三天的用户增量:</div>
+ 	<div id="container" style="height: 500px; width:450px; margin-top:-29px;"></div>
+ 	</div>
+ 	
+<!-- 日历 -->
+<div  style="float: left;">
+	 <!-- <div style="margin-left:60px;font-size:19px;">日历:</div> -->
+	 <div style="width:400px; display: inline-block; ">
+		<h3 id='h3Ele'></h3>
+	 </div>
+	 <div id='schedule-box' class="boxshaw" "></div>
+	 
+</div>	              </div>
+
+	              <!-- 表格-->
+	             
+	              <!-- 结束表格-->
+	           </div>
+
+
+	           <!-- 结束 首页主要内容-->
+	           <!-- 开始 首页侧边栏-->
+	         <div class="col-md-3" style="margin-top: 20px;">
+	            <!-- 天气 -->
+	              
+	            <div class="panel panel-default">
+	            	 
+	                 <div><iframe  style="width:200px;height:80px; margin-left: 0px;" allowtransparency="true" frameborder="0" width="385" height="96" scrolling="no" src="//tianqi.2345.com/plugin/widget/index.htm?s=1&z=1&t=0&v=0&d=3&bd=0&k=&f=&ltf=009944&htf=cc0000&q=1&e=1&a=1&c=54511&w=385&h=96&align=center"></iframe></div>
+	                
+				</div>
+	              
+
+	           
+	      <!-- 最新添加 -->
+ 				<div class="panel panel-default">
+	                 <div class="panel-heading">
+	                    <div class="panel-title">最新添加</div>
+	                 </div>
+	                 <div class="list-group">
+						{foreach $newSong as $vo} 
+	                    <div class="list-group-item">
+	                       <div class="media">
+	                          <div class="pull-left">
+	                             <span class="fa-stack fa-lg">
+	                                <em class="fa fa-circle fa-stack-2x text-green"></em>
+	                                <em class="fa fa-music fa-stack-1x fa-inverse text-white"></em>
+	                             </span>
+	                          </div>
+	                          <div class="media-body clearfix">
+	                             <p class="m0">
+	                                <!-- <small>{//$vo.name|msubstr=0,30}</small> -->
+	                               <a href="{$vo.music_url}"> <small>{$vo.name|msubstr=0,30,'utf-8',false} </small></a>
+	                             </p>
+	                             <small>{$vo.create_time|beforeTime}</small>
+	                          </div>
+	                       </div>
+	                    </div>
+	                    {/foreach}
+	                 <div class="panel-footer clearfix"></div>
+	              </div>
+	           </div> 
+				<!-- 日历 -->
+	           	<!-- <div class="panel panel-default">
+	           		            	 
+	           						                	
+	           						
+	           	
+	           		        </div> -->
+
+
+
+	 </div>
+	     <!-- 结束 页面内容-->
+<script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+option = {
+    xAxis: {
+        type: 'category',
+        data: [<?php echo date("Ymd")-2?>, <?php echo date("Ymd")-1?>, <?php echo date("Ymd")?>]
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [{
+        data: [{$count.qiantian}, {$count.yesterday}, {$count.today}],
+        type: 'line'
+    }]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+
+<!-- 日历 -->
+<script src="/admin/js/schedule.js"></script>
+<script>
+	var mySchedule = new Schedule({
+		el: '#schedule-box',
+		//date: '2018-9-20',
+		clickCb: function (y,m,d) {
+			document.querySelector('#h3Ele').innerHTML = '日期：'+y+'-'+m+'-'+d	
+		},
+		nextMonthCb: function (y,m,d) {
+			document.querySelector('#h3Ele').innerHTML = '日期：'+y+'-'+m+'-'+d	
+		},
+		nextYeayCb: function (y,m,d) {
+			document.querySelector('#h3Ele').innerHTML = '日期：'+y+'-'+m+'-'+d	
+		},
+		prevMonthCb: function (y,m,d) {
+			document.querySelector('#h3Ele').innerHTML = '日期：'+y+'-'+m+'-'+d	
+		},
+		prevYearCb: function (y,m,d) {
+			document.querySelector('#h3Ele').innerHTML = '日期：'+y+'-'+m+'-'+d	
+		}
+	});
+</script>
